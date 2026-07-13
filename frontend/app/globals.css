@@ -1,8 +1,21 @@
 @import "tailwindcss";
 
 @theme {
+  /* ==========================
+     Brand Primary Colors
+     ========================== */
+
   --color-navy: #0E2A47;
   --color-blue: #145DA0;
   --color-teal: #17B8A6;
   --color-orange: #FF7A32;
+
+  /* ==========================
+     Neutral Colors
+     ========================== */
+
+  --color-light-gray: #F4F7FB;
+  --color-slate: #5B6577;
+  --color-charcoal: #1C2333;
+  --color-white: #FFFFFF;
 }
