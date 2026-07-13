@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { Menu, X, ArrowRight } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -14,6 +15,7 @@ const navItems = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm">
@@ -52,16 +54,14 @@ export default function Navbar() {
 
         {/* Desktop Button */}
 
+        {pathname !== "/contact" && (
         <Link
           href="/contact"
-          className="hidden items-center gap-2 rounded-full bg-orange px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:bg-teal md:flex"
-        >
+          className="bg-orange px-5 py-3 rounded-lg text-white"
+          >
           Book a Workshop
-
-          <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white">
-            <ArrowRight size={16} className="text-charcoal" />
-          </span>
         </Link>
+        )}
 
         {/* Mobile Button */}
 
