@@ -9,8 +9,9 @@ import {
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
 
-import { ArrowLeft } from "lucide-react";
-import Navbar from "@/components/layout/Navbar";
+
+
+
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
@@ -24,17 +25,15 @@ export default function Contact() {
   return (
     <>
 
-    {/* Navbar  */}
-    <Navbar />
-
     <section id="contact" className="bg-light-gray py-20">
         <div className="mx-auto mb-8 max-w-7xl px-6 lg:px-8">
 
-</div>
+    </div>
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
         <div className="grid gap-16 lg:grid-cols-2">
-          {/* LEFT SIDE */}
 
+
+          {/* LEFT SIDE */}
           <div>
             <span className="rounded-full bg-orange/10 px-4 py-2 text-sm font-semibold text-orange">
               Contact Us
