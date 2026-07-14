@@ -32,7 +32,9 @@ export default function Navbar() {
               Stem Innovation Nepal
             </h1>
 
-            <p className="text-xs text-light-gray/80">IoT & Robotics Education</p>
+            <p className="text-xs text-light-gray/80">
+              IoT & Robotics Education
+            </p>
           </div>
         </Link>
 
