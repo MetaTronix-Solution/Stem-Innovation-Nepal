@@ -1,7 +1,7 @@
 export default function Hero() {
   return (
-    <main className="min-h-screen">
-      <section className="flex h-[90vh] items-center justify-center bg-navy">
+    <main className="min-h-full">
+      <section className="flex h-[110vh] items-center justify-center bg-navy">
         <div className="text-center">
           <h1 className="text-5xl font-bold text-white">
             STEM Innovation Nepal
