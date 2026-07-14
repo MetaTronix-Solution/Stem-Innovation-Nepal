@@ -89,12 +89,7 @@ export default function ProgramsPage() {
                 </div>
               </dl>
 
-              <Link
-                href="/contact"
-                className="mt-10 inline-flex rounded-full bg-orange px-8 py-4 font-semibold text-white transition duration-300 hover:bg-teal"
-              >
-                Book This Program
-              </Link>
+
             </div>
 
             {/* RIGHT CARD */}
