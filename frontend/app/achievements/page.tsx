@@ -1,96 +1,130 @@
-import type { Metadata } from "next";
-import { achievements, stats } from "@/lib/data";
+import Link from "next/link";
+import {
+  School,
+  GraduationCap,
+  Users,
+  Trophy,
+  CheckCircle,
+  ArrowRight,
+} from "lucide-react";
+import { achievements } from "@/lib/data";
 
-export const metadata: Metadata = {
-  title: "Achievements",
-  description:
-    "Milestones from Stem Innovation Nepal's IoT and Robotics workshops across Kathmandu.",
-  alternates: {
-    canonical: "/achievements",
+const stats = [
+  {
+    icon: School,
+    value: "30+",
+    label: "Partner Schools",
   },
-};
+  {
+    icon: GraduationCap,
+    value: "10+",
+    label: "College Workshops",
+  },
+  {
+    icon: Users,
+    value: "5000+",
+    label: "Students Trained",
+  },
+  {
+    icon: Trophy,
+    value: "100+",
+    label: "STEM Workshops",
+  },
+];
 
-export default function AchievementsPage() {
+export default function Achievements() {
   return (
-    <>
-      {/* HERO */}
-      <section className="bg-navy text-white">
-        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
-          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal">
-            Achievements
-          </p>
+    <section className="bg-light-gray py-24">
+      <div className="mx-auto max-w-7xl px-6 lg:px-8">
+        {/* Heading */}
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="rounded-full bg-orange/10 px-5 py-2 text-sm font-semibold text-orange">
+            Our Achievements
+          </span>
 
-          <h1 className="mt-4 max-w-3xl text-5xl font-bold leading-tight lg:text-6xl">
-            Milestones on the Network
-          </h1>
+          <h2 className="mt-6 text-4xl font-bold text-charcoal lg:text-5xl">
+            Making an Impact Through
+            <span className="mt-3 block text-orange">STEM Education</span>
+          </h2>
 
-          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75">
-            Over the years, Stem Innovation Nepal has collaborated with schools,
-            colleges, and educators to inspire thousands of students through
-            practical IoT and Robotics education.
+          <p className="mt-6 text-lg leading-8 text-slate">
+            Over the years, Stem Innovation Nepal has partnered with schools and
+            colleges across Nepal to deliver practical IoT and Robotics
+            education that inspires creativity, innovation, and real-world
+            problem solving.
           </p>
         </div>
-      </section>
 
-      {/* STATS */}
-      <section className="border-b border-gray-200 bg-white py-20">
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 sm:grid-cols-3 lg:px-8">
-          {stats.map((stat) => (
-            <div
-              key={stat.label}
-              className="rounded-xl border border-gray-200 bg-light-gray p-8 text-center shadow-sm"
-            >
-              <h2 className="text-5xl font-bold text-navy">
-                {stat.value}
-                <span className="text-teal">{stat.suffix}</span>
-              </h2>
+        {/* Statistics */}
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {stats.map((item, index) => {
+            const Icon = item.icon;
 
-              <p className="mt-3 text-lg text-slate">{stat.label}</p>
+            return (
+              <div
+                key={index}
+                className="rounded-3xl bg-white p-8 text-center shadow-lg transition duration-300 hover:-translate-y-2"
+              >
+                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-orange/10">
+                  <Icon className="h-8 w-8 text-orange" />
+                </div>
+
+                <h3 className="mt-6 text-4xl font-bold text-navy">
+                  {item.value}
+                </h3>
+
+                <p className="mt-2 text-slate">{item.label}</p>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Timeline */}
+        <div className="mt-24">
+          <div className="mx-auto max-w-3xl">
+            <div className="mb-16 text-center">
+              <h3 className="text-3xl font-bold text-charcoal md:text-4xl">
+                Our Journey
+              </h3>
+
+              <p className="mt-4 leading-8 text-slate">
+                Every partnership, workshop, and milestone represents another
+                step toward empowering students through practical STEM
+                education.
+              </p>
             </div>
-          ))}
-        </div>
-      </section>
 
-      {/* TIMELINE */}
-      <section className="bg-light-gray py-24">
-        <div className="mx-auto max-w-4xl px-6 lg:px-8">
-          <div className="mb-16 text-center">
-            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal">
-              Timeline
-            </p>
+            <div className="relative">
+              {/* Vertical Line */}
+              <div className="absolute left-3 top-2 bottom-2 w-px bg-gray-300" />
 
-            <h2 className="mt-4 text-4xl font-bold text-charcoal">
-              Our Journey
-            </h2>
-          </div>
+              <div className="space-y-12">
+                {achievements.map((item) => (
+                  <div key={item.title} className="relative flex gap-6">
+                    {/* Circle */}
+                    <div className="relative z-10 mt-1 h-6 w-6 rounded-full border-2 border-orange bg-white" />
 
-          <div className="relative">
-            <div className="absolute left-3 top-0 h-full w-0.5 bg-gray-300" />
+                    {/* Content */}
+                    <div className="pb-2">
+                      <p className="text-xs font-semibold uppercase tracking-[0.3em] text-teal">
+                        {item.year}
+                      </p>
 
-            <ol className="space-y-12">
-              {achievements.map((item) => (
-                <li key={item.title} className="relative flex gap-6">
-                  <div className="relative z-10 mt-2 h-6 w-6 rounded-full border-4 border-orange bg-white" />
+                      <h4 className="mt-2 text-2xl font-bold text-charcoal">
+                        {item.title}
+                      </h4>
 
-                  <div>
-                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal">
-                      {item.year}
-                    </p>
-
-                    <h3 className="mt-2 text-2xl font-semibold text-charcoal">
-                      {item.title}
-                    </h3>
-
-                    <p className="mt-3 leading-8 text-slate">
-                      {item.description}
-                    </p>
+                      <p className="mt-3 max-w-2xl leading-8 text-slate">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
-                </li>
-              ))}
-            </ol>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }
