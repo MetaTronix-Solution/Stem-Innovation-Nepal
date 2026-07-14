@@ -3,21 +3,21 @@
 @theme {
   /* ==========================
      Brand Colors
-     ========================== */
+     ========================= */
 
-  --color-navy: #0E2A47;
-  --color-blue: #145DA0;
-  --color-teal: #17B8A6;
-  --color-orange: #FF7A32;
+  --color-navy: #4A2C82;       /* Deep Violet — headers, footer, nav background */
+  --color-blue: #7B3FA0;       /* Royal Purple — primary buttons, links, accents */
+  --color-teal: #9B59D9;       /* Bright Amethyst — hover states, highlights, icons */
+  --color-orange: #7B3FA0;     /* Royal Purple — primary buttons, links, accents */
 
   /* ==========================
      Neutral Colors
-     ========================== */
+     ========================= */
 
-  --color-light-gray: #F4F7FB;
-  --color-slate: #5B6577;
-  --color-charcoal: #1C2333;
-  --color-white: #FFFFFF;
+  --color-light-gray: #E8DFF5; /* Soft Lavender — section backgrounds, cards */
+  --color-slate: #5A5A5A;      /* Adjusted slate subtext for readability */
+  --color-charcoal: #2D2D2D;   /* Charcoal — body text */
+  --color-white: #FFFFFF;      /* White — base background */
 }
 
 /* ==========================
