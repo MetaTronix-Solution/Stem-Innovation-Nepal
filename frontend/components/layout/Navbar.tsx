@@ -10,20 +10,17 @@ const navItems = [
   { name: "Programs", href: "/programs" },
   { name: "About", href: "/about" },
   { name: "Partners", href: "/partners" },
-  { name: "Contact", href: "/contact" },
   { name: "Gallery", href: "/gallery" },
+  { name: "Contact", href: "/contact" },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
 
-
-
   return (
     <header className="sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
-
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
           <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-lg font-bold text-white">
@@ -35,9 +32,7 @@ export default function Navbar() {
               Stem Innovation Nepal
             </h1>
 
-            <p className="text-xs text-slate">
-              IoT & Robotics Education
-            </p>
+            <p className="text-xs text-slate">IoT & Robotics Education</p>
           </div>
         </Link>
 
@@ -58,12 +53,12 @@ export default function Navbar() {
         {/* Desktop Button */}
 
         {pathname !== "/contact" && (
-        <Link
-          href="/contact"
-          className="bg-orange px-5 py-3 rounded-lg text-white"
+          <Link
+            href="/contact"
+            className="bg-orange px-5 py-3 rounded-lg text-white"
           >
-          Book a Workshop
-        </Link>
+            Book a Workshop
+          </Link>
         )}
 
         {/* Mobile Button */}
@@ -81,7 +76,6 @@ export default function Navbar() {
       {menuOpen && (
         <div className="border-t border-gray-200 bg-white md:hidden">
           <div className="flex flex-col px-6 py-5">
-
             {navItems.map((item) => (
               <Link
                 key={item.name}
@@ -98,7 +92,6 @@ export default function Navbar() {
               className="mt-5 flex items-center justify-center gap-2 rounded-full bg-orange px-6 py-3 font-semibold text-white transition hover:bg-teal"
             >
               Book a Workshop
-
               <ArrowRight size={18} />
             </Link>
           </div>
