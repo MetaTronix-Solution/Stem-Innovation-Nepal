@@ -62,8 +62,10 @@ export default function Achievements() {
           </span>
 
           <h2 className="mt-6 text-4xl font-bold text-charcoal lg:text-5xl">
-            Making an Impact Through
-            <span className="text-orange"> STEM Education</span>
+              Making an Impact Through
+              <span className="mt-3 block text-orange">
+                STEM Education
+              </span>
           </h2>
 
           <p className="mt-6 text-lg leading-8 text-slate">
