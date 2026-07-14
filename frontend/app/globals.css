@@ -5,19 +5,19 @@
      Brand Colors
      ========================= */
 
-  --color-navy: #4A2C82;       /* Deep Violet — headers, footer, nav background */
-  --color-blue: #7B3FA0;       /* Royal Purple — primary buttons, links, accents */
-  --color-teal: #9B59D9;       /* Bright Amethyst — hover states, highlights, icons */
-  --color-orange: #7B3FA0;     /* Royal Purple — primary buttons, links, accents */
+  --color-navy: #4a2c82; /* Deep Violet — headers, footer, nav background */
+  --color-blue: #7b3fa0; /* Royal Purple — primary buttons, links, accents */
+  --color-teal: #9b59d9; /* Bright Amethyst — hover states, highlights, icons */
+  --color-orange: #7b3fa0; /* Royal Purple — primary buttons, links, accents */
 
   /* ==========================
      Neutral Colors
      ========================= */
 
-  --color-light-gray: #E8DFF5; /* Soft Lavender — section backgrounds, cards */
-  --color-slate: #5A5A5A;      /* Adjusted slate subtext for readability */
-  --color-charcoal: #2D2D2D;   /* Charcoal — body text */
-  --color-white: #FFFFFF;      /* White — base background */
+  --color-light-gray: #e8dff5; /* Soft Lavender — section backgrounds, cards */
+  --color-slate: #5a5a5a; /* Adjusted slate subtext for readability */
+  --color-charcoal: #2d2d2d; /* Charcoal — body text */
+  --color-white: #ffffff; /* White — base background */
 }
 
 /* ==========================
