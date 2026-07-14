@@ -19,31 +19,31 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <header className="sticky top-0 z-50 border-b border-gray-200 bg-white shadow-sm">
+    <header className="sticky top-0 z-50 border-b border-white/10 bg-navy shadow-sm">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6 lg:px-8">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-navy text-lg font-bold text-white">
+          <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-white text-lg font-bold text-navy">
             S
           </div>
 
           <div>
-            <h1 className="text-lg font-bold text-charcoal">
+            <h1 className="text-lg font-bold text-white">
               Stem Innovation Nepal
             </h1>
 
-            <p className="text-xs text-slate">IoT & Robotics Education</p>
+            <p className="text-xs text-light-gray/80">IoT & Robotics Education</p>
           </div>
         </Link>
 
         {/* Desktop Navigation */}
 
-        <nav className="hidden items-center rounded-full border border-gray-200 bg-light-gray px-2 py-2 md:flex">
+        <nav className="hidden items-center rounded-full border border-white/10 bg-white/10 px-2 py-2 md:flex">
           {navItems.map((item) => (
             <Link
               key={item.name}
               href={item.href}
-              className="rounded-full px-5 py-2 text-sm font-medium text-slate transition-all duration-200 hover:bg-white hover:text-blue"
+              className="rounded-full px-5 py-2 text-sm font-medium text-white/80 transition-all duration-200 hover:bg-white/10 hover:text-white"
             >
               {item.name}
             </Link>
@@ -55,7 +55,7 @@ export default function Navbar() {
         {pathname !== "/contact" && (
           <Link
             href="/contact"
-            className="bg-orange px-5 py-3 rounded-lg text-white"
+            className="bg-orange px-5 py-3 rounded-lg text-white transition hover:bg-teal"
           >
             Book a Workshop
           </Link>
@@ -65,7 +65,7 @@ export default function Navbar() {
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="text-charcoal md:hidden"
+          className="text-white md:hidden"
         >
           {menuOpen ? <X size={28} /> : <Menu size={28} />}
         </button>
@@ -74,14 +74,14 @@ export default function Navbar() {
       {/* Mobile Menu */}
 
       {menuOpen && (
-        <div className="border-t border-gray-200 bg-white md:hidden">
+        <div className="border-t border-white/10 bg-navy md:hidden">
           <div className="flex flex-col px-6 py-5">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="rounded-lg px-4 py-3 text-slate transition hover:bg-light-gray hover:text-blue"
+                className="rounded-lg px-4 py-3 text-white/80 transition hover:bg-white/10 hover:text-white"
               >
                 {item.name}
               </Link>
