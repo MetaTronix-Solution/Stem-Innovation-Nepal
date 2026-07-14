@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import CircuitDivider from "@/components/CircuitDivider";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -100,8 +99,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      <CircuitDivider className="bg-white py-3" />
 
       {/* CEO */}
       <section className="bg-light-gray py-24">

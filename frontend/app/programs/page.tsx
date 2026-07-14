@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import CircuitDivider from "@/components/CircuitDivider";
 import { programs } from "@/lib/data";
 
 export const metadata: Metadata = {
@@ -121,8 +120,6 @@ export default function ProgramsPage() {
           </div>
         </section>
       ))}
-
-      <CircuitDivider className="bg-light-gray py-3" />
 
       {/* CTA */}
       <section className="bg-white py-24">
