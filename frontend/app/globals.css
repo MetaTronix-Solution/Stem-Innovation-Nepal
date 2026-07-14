@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 @theme {
+
   /* ==========================
-     Brand Primary Colors
+     Brand Colors
      ========================== */
 
   --color-navy: #0E2A47;
@@ -18,4 +19,50 @@
   --color-slate: #5B6577;
   --color-charcoal: #1C2333;
   --color-white: #FFFFFF;
+
+  /* ==========================
+     Fonts
+     ========================== */
+
+  --font-heading: var(--font-heading);
+  --font-body: var(--font-body);
+}
+
+/* ==========================
+   Global Styles
+   ========================== */
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-white);
+  color: var(--color-charcoal);
+}
+
+/* ==========================
+   Typography
+   ========================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+}
+
+p,
+span,
+a,
+button,
+input,
+textarea,
+label,
+li {
+  font-family: var(--font-body);
 }
