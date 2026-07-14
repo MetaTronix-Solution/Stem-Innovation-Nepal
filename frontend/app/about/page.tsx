@@ -43,11 +43,11 @@ export default function AboutPage() {
 
             <div className="mt-8 space-y-7 text-lg leading-9 text-slate">
               <p>
-                Stem Innovation Nepal is a Kathmandu-based education technology
+                Stem Innovation Nepal is a Kathmandu based education technology
                 company that delivers hands on IoT and Robotics training to
                 school and college students across Nepal. We partner directly
-                with academic institutions to bring practical, project-based
-                STEM learning into classrooms helping students build real-world
+                with academic institutions to bring practical, project based
+                STEM learning into classrooms helping students build real world
                 technical skills beyond the standard curriculum.
               </p>
 
@@ -133,7 +133,7 @@ export default function AboutPage() {
 
               <p>
                 “Our goal at Stem Innovation Nepal is simple: give every school
-                and college we work with the tools, curriculum, and hands-on
+                and college we work with the tools, curriculum, and hands on
                 time to make that moment happen for as many students as
                 possible. That's the vision we're building toward across
                 Kathmandu and, eventually, the rest of Nepal.”

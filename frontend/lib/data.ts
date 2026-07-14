@@ -22,7 +22,7 @@ export const navLinks = [
 
 export const stats = [
   { value: 30, suffix: "+", label: "Partner schools in Kathmandu" },
-  { value: 10, suffix: "+", label: "Colleges — IoT workshops" },
+  { value: 10, suffix: "+", label: "Colleges IoT workshops" },
   { value: 2, suffix: "", label: "Core programs: IoT & Robotics" },
 ];
 
@@ -32,10 +32,10 @@ export const programs = [
     title: "IoT Training",
     short: "Sensors, microcontrollers, and connected devices.",
     description:
-      "Students learn to wire, program, and deploy connected devices — from reading a sensor for the first time to shipping a working prototype that reports live data.",
-    ageGroup: "Grades 8–12 & first/second-year college",
+      "Students learn to wire, program, and deploy connected devices from reading a sensor for the first time to shipping a working prototype that reports live data.",
+    ageGroup: "Grades 8–12 & first/second year college",
     duration: "6–10 week module, workshop or semester format",
-    format: "Hands-on lab sessions, in-school or on-campus",
+    format: "Hands on lab sessions, in-school or on-campus",
     topics: [
       "Sensors & actuators (temperature, motion, light, gas)",
       "Microcontrollers: Arduino & ESP32",
@@ -48,10 +48,10 @@ export const programs = [
     title: "Robotics Training",
     short: "Robot design, programming, and competition prep.",
     description:
-      "From chassis design to autonomous navigation, students build robots by hand and then teach them to think — culminating in inter-school competitions.",
-    ageGroup: "Grades 6–12 & first/second-year college",
+      "From chassis design to autonomous navigation, students build robots by hand and then teach them to think culminating in inter school competitions.",
+    ageGroup: "Grades 6–12 & first/second year college",
     duration: "6–10 week module, workshop or semester format",
-    format: "Hands-on lab sessions with take-home kits",
+    format: "Hands on lab sessions with take home kits",
     topics: [
       "Robot design & mechanical assembly",
       "Programming logic & control systems",
@@ -95,7 +95,7 @@ export const testimonials = [
   },
   {
     quote:
-      "Parents noticed the difference immediately — kids were coming home explaining circuits instead of just grades.",
+      "Parents noticed the difference immediately kids were coming home explaining circuits instead of just grades.",
     name: "Principal",
     org: "Partner School, Kathmandu",
   },
@@ -123,7 +123,7 @@ export const team = [
   {
     name: "Workshop Coordinator",
     role: "Partnerships & Logistics",
-    bio: "Coordinates scheduling and on-site logistics across 30+ partner schools and 10+ partner colleges.",
+    bio: "Coordinates scheduling and on site logistics across 30+ partner schools and 10+ partner colleges.",
     lead: false,
   },
 ];
@@ -160,66 +160,3 @@ export const achievements = [
       "IoT workshops now delivered across 10+ colleges, with robotics competitions in planning for partner schools.",
   },
 ];
-
-export const galleryItems = [
-  {
-    id: "g1",
-    image: "/images/g1.svg",
-    caption: "IoT sensor lab, partner school workshop",
-    category: "IoT",
-  },
-  {
-    id: "g2",
-    image: "/images/g2.svg",
-    caption: "Robotics kit assembly, college workshop",
-    category: "Robotics",
-  },
-  {
-    id: "g3",
-    image: "/images/g3.svg",
-    caption: "Students demoing a connected-device prototype",
-    category: "IoT",
-  },
-  {
-    id: "g4",
-    image: "/images/g4.svg",
-    caption: "Robot navigation trial run",
-    category: "Robotics",
-  },
-  {
-    id: "g5",
-    image: "/images/g5.svg",
-    caption: "Trainer walkthrough, microcontroller wiring",
-    category: "IoT",
-  },
-  {
-    id: "g6",
-    image: "/images/g6.svg",
-    caption: "Inter-school robotics challenge",
-    category: "Robotics",
-  },
-  {
-    id: "g7",
-    image: "/images/g7.svg",
-    caption: "Campus visit and program briefing",
-    category: "Visit",
-  },
-  {
-    id: "g8",
-    image: "/images/g8.svg",
-    caption: "Students presenting final projects",
-    category: "IoT",
-  },
-  {
-    id: "g9",
-    image: "/images/g9.svg",
-    caption: "Robotics team, competition day",
-    category: "Robotics",
-  },
-];
-
-// NOTE FOR DEVELOPER: swap these placeholder SVGs in /public/images for real
-// workshop photos from the client, then update the `image` paths above.
-// Video embeds (e.g. YouTube) can be added per-item with an optional
-// `video` field (embed URL) — render an <iframe> in place of the image
-// when present.
