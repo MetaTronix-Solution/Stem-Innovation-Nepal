@@ -28,8 +28,8 @@ export default function PartnersPage() {
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75">
             Every institution below has partnered with Stem Innovation Nepal to
-            deliver hands on IoT and Robotics education—from single-day
-            workshops to full-semester STEM programs.
+            deliver hands on IoT and Robotics education from single day
+            workshops to full semester STEM programs.
           </p>
         </div>
       </section>

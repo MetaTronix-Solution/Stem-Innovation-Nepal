@@ -6,7 +6,7 @@ import { programs } from "@/lib/data";
 export const metadata: Metadata = {
   title: "Programs",
   description:
-    "Explore Stem Innovation Nepal's IoT and Robotics training programs — curriculum, age groups, duration, and format.",
+    "Explore Stem Innovation Nepal's IoT and Robotics training programs curriculum, age groups, duration, and format.",
   alternates: {
     canonical: "/programs",
   },
@@ -27,8 +27,8 @@ export default function ProgramsPage() {
           </h1>
 
           <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75">
-            Both programs are delivered on-site, in project-based modules, with
-            take-home reference material for students and teachers.
+            Both programs are delivered on-site, in project based modules, with
+            take home reference material for students and teachers.
           </p>
         </div>
       </section>
