@@ -39,15 +39,19 @@ body {
    Headings
    ========================== */
 
-h1,
-h2,
+h1 {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  color: var(--color-white); /* default for light/white sections */
+}
+
 h3,
 h4,
 h5,
 h6 {
   font-family: var(--font-heading);
   font-weight: 700;
-  color: var(--color-charcoal);
+  color: var(--color-charcoal); /* default for light/white sections */
 }
 
 /* ==========================
