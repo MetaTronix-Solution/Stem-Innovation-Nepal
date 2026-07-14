@@ -1,198 +1,96 @@
-import Link from "next/link";
-import {
-  School,
-  GraduationCap,
-  Users,
-  Trophy,
-  CheckCircle,
-  ArrowRight,
-} from "lucide-react";
+import type { Metadata } from "next";
+import { achievements, stats } from "@/lib/data";
 
-const stats = [
-  {
-    icon: School,
-    value: "30+",
-    label: "Partner Schools",
+export const metadata: Metadata = {
+  title: "Achievements",
+  description:
+    "Milestones from Stem Innovation Nepal's IoT and Robotics workshops across Kathmandu.",
+  alternates: {
+    canonical: "/achievements",
   },
-  {
-    icon: GraduationCap,
-    value: "10+",
-    label: "College Workshops",
-  },
-  {
-    icon: Users,
-    value: "5000+",
-    label: "Students Trained",
-  },
-  {
-    icon: Trophy,
-    value: "100+",
-    label: "STEM Workshops",
-  },
-];
+};
 
-const milestones = [
-  "Delivered 10+ college-level IoT workshops across Nepal.",
-  "Partnered with more than 30 schools and educational institutions.",
-  "Introduced students to hands-on Robotics and IoT technologies.",
-  "Conducted project-based STEM learning programs.",
-  "Inspired innovation through practical technology education.",
-  "Continued expanding STEM education to new institutions every year.",
-];
-
-const institutions = [
-  "Partner School",
-  "Engineering College",
-  "STEM Academy",
-  "Innovation Campus",
-  "Technical Institute",
-  "Community School",
-];
-
-export default function Achievements() {
+export default function AchievementsPage() {
   return (
-    <section className="bg-light-gray py-24">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-
-        {/* Heading */}
-        <div className="mx-auto max-w-3xl text-center">
-
-          <span className="rounded-full bg-orange/10 px-5 py-2 text-sm font-semibold text-orange">
-            Our Achievements
-          </span>
-
-          <h2 className="mt-6 text-4xl font-bold text-charcoal lg:text-5xl">
-              Making an Impact Through
-              <span className="mt-3 block text-orange">
-                STEM Education
-              </span>
-          </h2>
-
-          <p className="mt-6 text-lg leading-8 text-slate">
-            Over the years, Stem Innovation Nepal has partnered with schools
-            and colleges across Nepal to deliver practical IoT and Robotics
-            education that inspires creativity, innovation, and real-world
-            problem solving.
+    <>
+      {/* HERO */}
+      <section className="bg-navy text-white">
+        <div className="mx-auto max-w-7xl px-6 py-24 lg:px-8">
+          <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal">
+            Achievements
           </p>
 
+          <h1 className="mt-4 max-w-3xl text-5xl font-bold leading-tight lg:text-6xl">
+            Milestones on the Network
+          </h1>
+
+          <p className="mt-6 max-w-2xl text-lg leading-8 text-white/75">
+            Over the years, Stem Innovation Nepal has collaborated with schools,
+            colleges, and educators to inspire thousands of students through
+            practical IoT and Robotics education.
+          </p>
         </div>
+      </section>
 
-        {/* Statistics */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {/* STATS */}
+      <section className="border-b border-gray-200 bg-white py-20">
+        <div className="mx-auto grid max-w-7xl gap-8 px-6 sm:grid-cols-3 lg:px-8">
+          {stats.map((stat) => (
+            <div
+              key={stat.label}
+              className="rounded-xl border border-gray-200 bg-light-gray p-8 text-center shadow-sm"
+            >
+              <h2 className="text-5xl font-bold text-navy">
+                {stat.value}
+                <span className="text-teal">{stat.suffix}</span>
+              </h2>
 
-          {stats.map((item, index) => {
-            const Icon = item.icon;
-
-            return (
-              <div
-                key={index}
-                className="rounded-3xl bg-white p-8 text-center shadow-lg transition duration-300 hover:-translate-y-2"
-              >
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-orange/10">
-                  <Icon className="h-8 w-8 text-orange" />
-                </div>
-
-                <h3 className="mt-6 text-4xl font-bold text-navy">
-                  {item.value}
-                </h3>
-
-                <p className="mt-2 text-slate">
-                  {item.label}
-                </p>
-              </div>
-            );
-          })}
-
+              <p className="mt-3 text-lg text-slate">{stat.label}</p>
+            </div>
+          ))}
         </div>
+      </section>
 
-        {/* Milestones */}
-        <div className="mt-24 grid gap-16 lg:grid-cols-2">
-
-          <div>
-
-            <h3 className="text-3xl font-bold text-charcoal">
-              Key Milestones
-            </h3>
-
-            <p className="mt-4 leading-8 text-slate">
-              Every workshop, every partnership, and every student trained
-              represents another step toward building Nepal's future
-              innovators.
+      {/* TIMELINE */}
+      <section className="bg-light-gray py-24">
+        <div className="mx-auto max-w-4xl px-6 lg:px-8">
+          <div className="mb-16 text-center">
+            <p className="text-sm font-semibold uppercase tracking-[0.3em] text-teal">
+              Timeline
             </p>
 
-            <div className="mt-10 space-y-6">
+            <h2 className="mt-4 text-4xl font-bold text-charcoal">
+              Our Journey
+            </h2>
+          </div>
 
-              {milestones.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start gap-4"
-                >
-                  <div className="rounded-full bg-teal/10 p-2">
-                    <CheckCircle className="h-6 w-6 text-teal" />
+          <div className="relative">
+            <div className="absolute left-3 top-0 h-full w-0.5 bg-gray-300" />
+
+            <ol className="space-y-12">
+              {achievements.map((item) => (
+                <li key={item.title} className="relative flex gap-6">
+                  <div className="relative z-10 mt-2 h-6 w-6 rounded-full border-4 border-orange bg-white" />
+
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal">
+                      {item.year}
+                    </p>
+
+                    <h3 className="mt-2 text-2xl font-semibold text-charcoal">
+                      {item.title}
+                    </h3>
+
+                    <p className="mt-3 leading-8 text-slate">
+                      {item.description}
+                    </p>
                   </div>
-
-                  <p className="leading-7 text-slate">
-                    {item}
-                  </p>
-                </div>
+                </li>
               ))}
-
-            </div>
-
+            </ol>
           </div>
-
-          {/* Featured Institutions */}
-          <div>
-
-            <h3 className="text-3xl font-bold text-charcoal">
-              Institutions We've Worked With
-            </h3>
-
-            <p className="mt-4 leading-8 text-slate">
-              We proudly collaborate with schools and colleges throughout
-              Nepal to bring practical STEM education into classrooms.
-            </p>
-
-            <div className="mt-10 grid grid-cols-2 gap-5">
-
-              {institutions.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex h-28 items-center justify-center rounded-2xl border border-gray-200 bg-white text-center font-semibold text-charcoal shadow-sm"
-                >
-                  {item}
-                </div>
-              ))}
-
-            </div>
-
-          </div>
-
         </div>
-
-        {/* CTA */}
-        <div className="mt-24 rounded-3xl bg-navy px-8 py-16 text-center text-white">
-
-          <h3 className="text-4xl font-bold">
-            Be Our Next Success Story
-          </h3>
-
-          <p className="mx-auto mt-6 max-w-2xl text-lg text-gray-300">
-            Join the growing network of schools and colleges empowering
-            students through hands-on IoT, Robotics, and STEM education.
-          </p>
-
-          <Link
-            href="/contact"
-            className="mt-10 inline-flex items-center gap-2 rounded-xl bg-orange px-8 py-4 font-semibold text-white transition hover:bg-teal"
-          >
-            Book a Workshop
-            <ArrowRight size={20} />
-          </Link>
-
-        </div>
-
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
