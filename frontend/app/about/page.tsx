@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "About Us",
@@ -104,8 +105,15 @@ export default function AboutPage() {
       <section className="bg-light-gray py-24">
         <div className="mx-auto grid max-w-7xl gap-16 px-6 lg:grid-cols-[280px_1fr] lg:px-8">
           <div className="flex flex-col items-center lg:items-start">
-            <div className="flex h-44 w-44 items-center justify-center rounded-full bg-navy text-5xl font-bold text-white">
-              SY
+            <div className="relative h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40 lg:h-44 lg:w-44">
+              <Image
+                src="/images/ceo.jpeg"
+                alt="Siddhartha Yadav, CEO of Stem Innovation Nepal"
+                fill
+                className="object-cover object-top"
+                sizes="(min-width: 1024px) 176px, (min-width: 640px) 160px, 128px"
+                priority
+              />
             </div>
 
             <h3 className="mt-6 text-3xl font-semibold text-charcoal">
@@ -122,18 +130,18 @@ export default function AboutPage() {
 
             <blockquote className="mt-6 space-y-6 text-xl leading-10 text-charcoal">
               <p>
-                “When students get to wire their first sensor or watch a robot
+                "When students get to wire their first sensor or watch a robot
                 they built respond to their own code, something changes STEM
                 stops being a subject on a timetable and becomes something they
-                own.”
+                own."
               </p>
 
               <p>
-                “Our goal at Stem Innovation Nepal is simple: give every school
+                "Our goal at Stem Innovation Nepal is simple: give every school
                 and college we work with the tools, curriculum, and hands on
                 time to make that moment happen for as many students as
                 possible. That's the vision we're building toward across
-                Kathmandu and, eventually, the rest of Nepal.”
+                Kathmandu and, eventually, the rest of Nepal."
               </p>
             </blockquote>
           </div>
