@@ -25,6 +25,13 @@ export class AuthService {
         try {
             const {email, password} = loginDto;
 
+            if(!email || !password) {
+                return {
+                    success: false,
+                    message: "All fields required"
+                }
+            }
+
             const admin = await this.adminModel.findOne({email});
 
             if(!admin) {
@@ -77,11 +84,15 @@ export class AuthService {
     //logout
 
     async logout(response: Response) {
-        response.clearCookie("AdminToken");
+  response.clearCookie("AdminToken", {
+    httpOnly: true,
+    sameSite: "lax",
+    secure: process.env.NODE_ENV === "production",
+  });
 
-        return {
-            success: true,
-            message: "Successfully Logout"
-        }
-    }
+  return {
+    success: true,
+    message: "Logout Successfully",
+  };
+}
 }
