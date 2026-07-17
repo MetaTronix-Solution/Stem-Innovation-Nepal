@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Plus, Trash2, ImageOff } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -12,119 +13,215 @@ import {
   DialogTrigger,
   DialogFooter,
 } from "@/components/ui/dialog";
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import api from "@/lib/axios";
 
-type GalleryImage = { id: string; url: string; caption: string };
-
-// TODO: replace with images fetched from your backend once it exists
-const initialImages: GalleryImage[] = [
-  { id: "1", url: "/Logo.jpeg", caption: "Robotics workshop, Kathmandu" },
-];
+interface GalleryImage {
+  _id: string;
+  image: string;
+  caption: string;
+}
 
 export default function GalleryPage() {
-  const [images, setImages] = useState<GalleryImage[]>(initialImages);
+  const [images, setImages] = useState<GalleryImage[]>([]);
   const [open, setOpen] = useState(false);
-  const [url, setUrl] = useState("");
+
   const [caption, setCaption] = useState("");
+  const [file, setFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState("");
 
-  function handleAdd() {
-    if (!url.trim()) return;
-    // TODO: replace with a real file upload to your backend/storage once it exists
-    setImages((prev) => [{ id: crypto.randomUUID(), url, caption }, ...prev]);
-    setUrl("");
-    setCaption("");
-    setOpen(false);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    fetchGallery();
+  }, []);
+
+  async function fetchGallery() {
+    try {
+      const res = await api.get("/gallery");
+
+      if (res.data.success) {
+        setImages(res.data.gallery);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   }
 
-  function handleDelete(id: string) {
-    setImages((prev) => prev.filter((img) => img.id !== id));
+  async function handleAdd() {
+    if (!file) {
+      alert("Please select an image");
+      return;
+    }
+
+    const formData = new FormData();
+
+    formData.append("image", file);
+    formData.append("caption", caption);
+
+    try {
+      setLoading(true);
+
+      // withCredentials and baseURL already come from the shared `api` instance,
+      // only the content-type header needs to be overridden here.
+      await api.post("/gallery", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
+      await fetchGallery();
+
+      setCaption("");
+      setFile(null);
+      setPreview("");
+      setOpen(false);
+    } catch (err) {
+      console.log(err);
+      alert("Upload failed");
+    } finally {
+      setLoading(false);
+    }
   }
+
+  async function handleDelete(id: string) {
+    const confirmDelete = confirm("Delete this image?");
+
+    if (!confirmDelete) return;
+
+    try {
+      await api.delete(`/gallery/${id}`);
+
+      fetchGallery();
+    } catch (err) {
+      console.log(err);
+      alert("Delete failed");
+    }
+  }
+
+  // Revoke the object URL when it's replaced or the component unmounts,
+  // otherwise each selected file leaks a blob URL.
+  useEffect(() => {
+    return () => {
+      if (preview) URL.revokeObjectURL(preview);
+    };
+  }, [preview]);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-foreground">Gallery</h1>
-          <p className="text-muted-foreground text-sm">
-            Manage the photos shown on the public gallery page.
+          <h1 className="text-3xl font-bold">Gallery</h1>
+          <p className="text-muted-foreground">
+            Upload and manage gallery images.
           </p>
         </div>
 
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <Button>
-              <Plus className="h-4 w-4" />
-              Add image
+              <Plus className="mr-2 h-4 w-4" />
+              Upload Image
             </Button>
           </DialogTrigger>
+
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Add a gallery image</DialogTitle>
+              <DialogTitle>Add Gallery Image</DialogTitle>
             </DialogHeader>
-            <div className="space-y-4 py-2">
-              <div className="space-y-1.5">
-                <Label htmlFor="url">Image URL</Label>
+
+            <div className="space-y-5">
+              <div>
+                <Label>Choose Image</Label>
+
                 <Input
-                  id="url"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  placeholder="/images/workshop-1.jpg"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    const selected = e.target.files?.[0];
+
+                    if (!selected) return;
+
+                    setFile(selected);
+                    setPreview(URL.createObjectURL(selected));
+                  }}
                 />
               </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="caption">Caption</Label>
+
+              {preview && (
+                <div className="relative h-56 rounded-xl overflow-hidden border">
+                  <Image
+                    src={preview}
+                    alt="Preview"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+
+              <div>
+                <Label>Caption</Label>
+
                 <Input
-                  id="caption"
                   value={caption}
                   onChange={(e) => setCaption(e.target.value)}
-                  placeholder="e.g. IoT workshop at XYZ School"
+                  placeholder="Robotics Workshop"
                 />
               </div>
             </div>
+
             <DialogFooter>
               <Button variant="outline" onClick={() => setOpen(false)}>
                 Cancel
               </Button>
-              <Button onClick={handleAdd}>Add</Button>
+
+              <Button onClick={handleAdd} disabled={loading}>
+                {loading ? "Uploading..." : "Upload"}
+              </Button>
             </DialogFooter>
           </DialogContent>
         </Dialog>
       </div>
 
-      <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 xl:grid-cols-4">
-        {images.map((img) => (
-          <div
-            key={img.id}
-            className="group relative rounded-xl overflow-hidden border border-border aspect-square bg-muted"
-          >
-            <Image
-              src={img.url}
-              alt={img.caption || "Gallery image"}
-              fill
-              sizes="(max-width: 768px) 50vw, 25vw"
-              className="object-cover"
-            />
-            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors flex items-end justify-between p-2 opacity-0 group-hover:opacity-100">
-              <span className="text-white text-xs truncate">{img.caption}</span>
-              <Button
-                variant="destructive"
-                size="icon"
-                className="h-7 w-7 shrink-0"
-                onClick={() => handleDelete(img.id)}
-              >
-                <Trash2 className="h-3.5 w-3.5" />
-              </Button>
+      {images.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-24">
+          <ImageOff className="h-12 w-12 text-muted-foreground mb-3" />
+          <p>No gallery images found.</p>
+        </div>
+      ) : (
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {images.map((img) => (
+            <div
+              key={img._id}
+              className="group overflow-hidden rounded-xl border bg-white shadow-sm"
+            >
+              <div className="relative aspect-square">
+                <Image
+  src={`${process.env.NEXT_PUBLIC_API_URL}${img.image}`}
+  alt={img.caption}
+  fill
+  unoptimized
+  className="object-cover transition duration-300 group-hover:scale-105"
+/>
+              </div>
+
+              <div className="flex items-center justify-between p-3">
+                <p className="truncate text-sm font-medium">{img.caption}</p>
+
+                <Button
+                  size="icon"
+                  variant="destructive"
+                  onClick={() => handleDelete(img._id)}
+                >
+                  <Trash2 className="h-4 w-4" />
+                </Button>
+              </div>
             </div>
-          </div>
-        ))}
-        {images.length === 0 && (
-          <div className="col-span-full flex flex-col items-center gap-2 text-muted-foreground py-12">
-            <ImageOff className="h-8 w-8" />
-            <p className="text-sm">No images yet. Add your first one.</p>
-          </div>
-        )}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }

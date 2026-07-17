@@ -1,7 +1,9 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
   UploadedFile,
   UseInterceptors,
@@ -34,5 +36,10 @@ export class GalleryController {
   @Get()
   getGallery() {
     return this.galleryService.getGallery();
+  }
+
+  @Delete(":id")
+  deleteGallery(@Param("id") id: string) {
+    return this.galleryService.deleteGallery(id);
   }
 }
