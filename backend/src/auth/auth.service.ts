@@ -84,10 +84,10 @@ export class AuthService {
     //logout
 
     async logout(response: Response) {
-  response.clearCookie("AdminToken", {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
+            response.clearCookie("AdminToken", {
+            httpOnly: true,
+            sameSite: "lax",
+            secure: process.env.NODE_ENV === "production",
   });
 
   return {
