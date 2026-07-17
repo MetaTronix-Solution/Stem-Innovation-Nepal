@@ -48,7 +48,7 @@ export class AuthService {
             const token = await this.jwtService.signAsync({id: admin._id, email: admin.email});
 
             //Save Cookies
-            response.cookie("Admintoken", token, {
+            response.cookie("AdminToken", token, {
                 httpOnly: true,
                 secure: process.env.NODE_ENV === "production",
                 sameSite: "lax",
@@ -70,6 +70,18 @@ export class AuthService {
                 message: "Internal Server Error",
                 error: error.message
             }
+        }
+    }
+
+
+    //logout
+
+    async logout(response: Response) {
+        response.clearCookie("AdminToken");
+
+        return {
+            success: true,
+            message: "Successfully Logout"
         }
     }
 }
