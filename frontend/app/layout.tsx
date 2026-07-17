@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Poppins, Inter } from "next/font/google";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,8 +20,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
-      <body>{children}</body>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${poppins.variable} ${inter.variable}`}
+    >
+      <body>
+        <TooltipProvider>{children}</TooltipProvider>
+      </body>
     </html>
   );
 }
