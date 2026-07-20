@@ -7,7 +7,6 @@ export class CreateContactDto {
     @IsNotEmpty()
     name!: string;
 
-
     @IsString()
     @IsNotEmpty()
     emailOrPhone!: string;
