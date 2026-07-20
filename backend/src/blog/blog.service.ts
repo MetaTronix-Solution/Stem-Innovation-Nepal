@@ -4,7 +4,7 @@ import {
   NotFoundException,
 } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import mongoose, { Model } from 'mongoose';
+import { Model } from 'mongoose';
 
 import { Blog } from './schemas/blog.schema';
 import { CreateBlogDto } from './dto/create-blog.dto';
@@ -45,6 +45,22 @@ export class BlogService {
     return await this.blogModel.find().sort({
       createdAt: -1,
     });
+  }
+
+  async findPublishedBlogs() {
+    return await this.blogModel
+      .find({ published: true })
+      .sort({ createdAt: -1 });
+  }
+
+  async findOnePublishedBlog(id: string) {
+    const blog = await this.blogModel.findOne({ _id: id, published: true });
+
+    if (!blog) {
+      throw new NotFoundException('Blog not found');
+    }
+
+    return blog;
   }
 
   async findOneBlog(id: string) {
