@@ -16,13 +16,18 @@ export class BlogService {
     @InjectModel(Blog.name)
     private readonly blogModel: Model<Blog>,
   ) {}
-  async createBlog(createBlogDto: CreateBlogDto, file: Express.Multer.File) {
+  async createBlog(
+    createBlogDto: CreateBlogDto,
+    file: Express.Multer.File,
+    author: string,
+  ) {
     try {
       const imageUrl = `/uploads/blog/${file.filename}`;
 
       const blog = await this.blogModel.create({
         ...createBlogDto,
         imageUrl,
+        author,
       });
 
       return {
@@ -31,6 +36,7 @@ export class BlogService {
         data: blog,
       };
     } catch (error) {
+      console.error('CREATE BLOG ERROR:', error);
       throw new InternalServerErrorException('Failed to create blog');
     }
   }
