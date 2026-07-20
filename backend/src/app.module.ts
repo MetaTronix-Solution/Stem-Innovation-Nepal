@@ -5,6 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
+import { ContactModule } from './contact/contact.module';
 
 
 @Module({
@@ -23,6 +24,8 @@ import { GalleryModule } from './gallery/gallery.module';
     AuthModule,
 
     GalleryModule,
+
+    ContactModule,
 
   ],
 
