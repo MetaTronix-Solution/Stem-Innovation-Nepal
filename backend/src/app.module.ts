@@ -7,6 +7,8 @@ import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { ContactModule } from './contact/contact.module';
 import { BlogModule } from './blog/blog.module';
+import { LabModule } from './lab/lab.module';
+import { LabItemModule } from './lab-item/lab-item.module';
 
 @Module({
   imports: [
@@ -27,6 +29,10 @@ import { BlogModule } from './blog/blog.module';
     BlogModule,
 
     ContactModule,
+
+    LabModule,
+
+    LabItemModule,
   ],
 })
 export class AppModule {}
