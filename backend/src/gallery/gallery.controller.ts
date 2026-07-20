@@ -7,22 +7,18 @@ import {
   Post,
   UploadedFile,
   UseInterceptors,
-} from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
-import { GalleryService } from "./gallery.service";
-import { CreateGalleryDto } from "./dto/create-gallery.dto";
-import { multerOptions } from "src/common/multer/multer.config";
+} from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { GalleryService } from './gallery.service';
+import { CreateGalleryDto } from './dto/create-gallery.dto';
+import { multerOptions } from 'src/common/multer/multer.config';
 
-@Controller("gallery")
+@Controller('gallery')
 export class GalleryController {
-  constructor(
-    private readonly galleryService: GalleryService,
-  ) {}
+  constructor(private readonly galleryService: GalleryService) {}
 
   @Post()
-  @UseInterceptors(
-    FileInterceptor("image", multerOptions),
-  )
+  @UseInterceptors(FileInterceptor('image', multerOptions('gallery')))
   uploadGallery(
     @Body() createGalleryDto: CreateGalleryDto,
     @UploadedFile() file: Express.Multer.File,
@@ -38,8 +34,8 @@ export class GalleryController {
     return this.galleryService.getGallery();
   }
 
-  @Delete(":id")
-  deleteGallery(@Param("id") id: string) {
+  @Delete(':id')
+  deleteGallery(@Param('id') id: string) {
     return this.galleryService.deleteGallery(id);
   }
 }

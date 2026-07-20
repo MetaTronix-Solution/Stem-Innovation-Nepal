@@ -6,10 +6,9 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { ContactModule } from './contact/contact.module';
-
+import { BlogModule } from './blog/blog.module';
 
 @Module({
-
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
@@ -25,9 +24,9 @@ import { ContactModule } from './contact/contact.module';
 
     GalleryModule,
 
+    BlogModule,
+
     ContactModule,
-
   ],
-
 })
 export class AppModule {}
