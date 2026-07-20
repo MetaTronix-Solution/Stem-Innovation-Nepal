@@ -10,6 +10,7 @@ import { BlogModule } from './blog/blog.module';
 import { LabModule } from './lab/lab.module';
 import { LabItemModule } from './lab-item/lab-item.module';
 
+
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -34,5 +35,6 @@ import { LabItemModule } from './lab-item/lab-item.module';
 
     LabItemModule,
   ],
+
 })
 export class AppModule {}
