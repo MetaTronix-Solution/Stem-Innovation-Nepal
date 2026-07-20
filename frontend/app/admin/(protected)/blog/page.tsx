@@ -58,7 +58,7 @@ export default function BlogPage() {
   async function loadPosts() {
     try {
       setLoading(true);
-      const data = await blogService.getAll();
+      const data = await blogService.getAllAdmin();
       setPosts(data);
     } catch (err) {
       toast.error("Failed to load blog posts");
