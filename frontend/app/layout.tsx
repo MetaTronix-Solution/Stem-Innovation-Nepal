@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Poppins, Inter } from "next/font/google";
 import { TooltipProvider } from "@/components/ui/tooltip";
+  import { Toaster } from "@/components/ui/sonner";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -14,6 +15,9 @@ const inter = Inter({
   variable: "--font-body",
 });
 
+
+
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -26,7 +30,9 @@ export default function RootLayout({
       className={`${poppins.variable} ${inter.variable}`}
     >
       <body>
-        <TooltipProvider>{children}</TooltipProvider>
+        <TooltipProvider>{children}
+          <Toaster />
+        </TooltipProvider>
       </body>
     </html>
   );
