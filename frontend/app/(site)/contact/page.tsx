@@ -8,19 +8,55 @@ import {
   FaLinkedinIn,
 } from "react-icons/fa";
 import { useRouter } from "next/navigation";
-
-
+import api from "@/lib/axios";
+import { toast } from "sonner";
 
 
 
 export default function Contact() {
-  const [submitted, setSubmitted] = useState(false);
-  const router = useRouter();
+      const [formData, setFormData] = useState({
+      name: "",
+      emailOrPhone: "",
+      school: "",
+      message: "",
+      });
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    setSubmitted(true);
+      const [loading, setLoading] = useState(false);
+      const [submitted, setSubmitted] = useState(false);
+
+
+      async function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  e.preventDefault();
+
+  const toastId = toast.loading("Sending your inquiry...");
+
+  try {
+    setLoading(true);
+
+    const res = await api.post("/contact", formData);
+
+    toast.dismiss(toastId);
+
+    if (res.data.success) {
+      toast.success("Your inquiry has been sent successfully!");
+
+      setFormData({
+        name: "",
+        emailOrPhone: "",
+        school: "",
+        message: "",
+      });
+    }
+  } catch (error: any) {
+    toast.dismiss(toastId);
+
+    toast.error(
+      error.response?.data?.message || "Something went wrong"
+    );
+  } finally {
+    setLoading(false);
   }
+}
 
   return (
     <>
@@ -156,6 +192,13 @@ export default function Contact() {
                   <input
                     type="text"
                     required
+                    value={formData.name}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        name: e.target.value
+                      })
+                    }
                     placeholder="Your Full Name"
                     className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue"
                   />
@@ -169,6 +212,13 @@ export default function Contact() {
                   <input
                     type="text"
                     required
+                    value={formData.emailOrPhone}
+                    onChange={(e) =>
+                      setFormData({
+                        ...formData,
+                        emailOrPhone: e.target.value,
+                      })
+                    }
                     placeholder="How should we reach you?"
                     className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue"
                   />
@@ -181,10 +231,17 @@ export default function Contact() {
                 </label>
 
                 <input
-                  type="text"
-                  placeholder="Institution Name"
-                  className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue"
-                />
+                type="text"
+                value={formData.school}
+                onChange={(e) =>
+                  setFormData({
+                    ...formData,
+                    school: e.target.value,
+                  })
+                }
+                placeholder="Institution Name"
+                className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue"
+              />
               </div>
 
               <div>
@@ -195,23 +252,27 @@ export default function Contact() {
                 <textarea
                   rows={6}
                   required
+                  value={formData.message}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      message: e.target.value,
+                    })
+                  }
                   placeholder="Tell us about your training needs..."
                   className="w-full rounded-xl border border-gray-300 px-4 py-3 outline-none transition focus:border-blue"
                 />
               </div>
 
               <button
-                type="submit"
-                className="w-full rounded-xl bg-orange py-4 font-semibold text-white transition hover:bg-teal"
-              >
-                Contact Our Team
-              </button>
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-orange py-4 font-semibold text-white transition hover:bg-teal disabled:opacity-60"
+            >
+              {loading ? "Sending..." : "Contact Our Team"}
+            </button>
 
-              {submitted && (
-                <p className="text-center font-medium text-teal">
-                  Thank you! Your message has been submitted successfully.
-                </p>
-              )}
+
             </form>
           </div>
         </div>
