@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { blogService } from "@/services/blog.service";
+import type { Blog } from "@/types/blog";
 
 export const revalidate = 60;
 
@@ -14,10 +15,18 @@ function formatDate(dateStr: string) {
 }
 
 export default async function BlogPage() {
-  const posts = await blogService.getAll();
+  let posts: Blog[] = [];
+  let loadFailed = false;
+
+  try {
+    posts = await blogService.getAll();
+  } catch (err) {
+    console.error("Failed to load blog posts:", err);
+    loadFailed = true;
+  }
 
   return (
-    <div className="bg-white">
+    <div className="bg-white pt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 py-16 space-y-10">
         <div className="space-y-2">
           <p className="text-sm font-semibold tracking-wide uppercase text-[color:var(--color-blue)]">
@@ -32,13 +41,20 @@ export default async function BlogPage() {
           </p>
         </div>
 
-        {posts.length === 0 && (
+        {loadFailed && (
+          <p className="text-[color:var(--color-slate)] text-center py-20">
+            We couldn&apos;t load posts right now. Please check back in a
+            moment.
+          </p>
+        )}
+
+        {!loadFailed && posts.length === 0 && (
           <p className="text-[color:var(--color-slate)] text-center py-20">
             No posts published yet — check back soon.
           </p>
         )}
 
-        {posts.length > 0 && (
+        {!loadFailed && posts.length > 0 && (
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((post, i) => (
               <Link
