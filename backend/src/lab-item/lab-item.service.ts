@@ -57,8 +57,8 @@ export class LabItemService {
 
     //Update lab item
 
-   async update(id: string, updateLabItemDto, UpdateLabItemDto) {
-    const item = await this.labItemModel.findByIdAndUpdate(id, updateLabItemDto, {
+   async update(id: string, updateLabDto, UpdateLabDto) {
+    const item = await this.labItemModel.findByIdAndUpdate(id, updateLabDto, {
         new: true,
         runValidators: true,
     });
