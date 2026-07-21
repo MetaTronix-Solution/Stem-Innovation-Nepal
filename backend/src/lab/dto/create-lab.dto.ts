@@ -1,30 +1,34 @@
-import { Type } from "class-transformer";
-import { IsNotEmpty, IsNumber, IsString, Min } from "class-validator";
-
-
+import {
+  IsArray,
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateLabDto {
-    @IsString()
-    @IsNotEmpty()
+  @IsString()
+  @IsNotEmpty()
+  title!: string;
 
-    title!: string;
+  @IsString()
+  @IsNotEmpty()
+  description!: string;
 
-    @IsString()
-    @IsNotEmpty()
-    description!: string;
+  @Type(() => Number)
+  @IsNumber()
+  price!: number;
 
+  @Type(() => Number)
+  @IsNumber()
+  @IsOptional()
+  quantity?: number;
 
-    @IsString()
-    @IsNotEmpty()
-    specification!: string;
-
-    @Type(() => Number)
-    @IsNumber()
-    @Min(0)
-    price!: number;
-
-    @IsString()
-    @IsNotEmpty()
-    category!: string;
-
+  @IsArray()
+  @IsMongoId({
+    each: true,
+  })
+  labItems!: string[];
 }

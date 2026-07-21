@@ -26,7 +26,7 @@ export type LabDocument = HydratedDocument<Lab>;
     @Prop({
         required: true,
     })
-    image!: true;
+    image!: string;
 
     @Prop({
         required: true
@@ -42,7 +42,7 @@ export type LabDocument = HydratedDocument<Lab>;
         ],
         default: [],
     })
-    labItems!: LabItem[];
+    labItems!: mongoose.Types.ObjectId[];
 
 
 
