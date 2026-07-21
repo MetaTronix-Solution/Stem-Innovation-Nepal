@@ -1,7 +1,9 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
+import mongoose, { HydratedDocument } from "mongoose";
+import { LabItem } from "src/lab-item/schemas/lab-item.schema";
 
 
-export type LabDocument = Lab & Document;
+export type LabDocument = HydratedDocument<Lab>;
 
 
 @Schema({
@@ -24,28 +26,25 @@ export type LabDocument = Lab & Document;
     @Prop({
         required: true,
     })
-    specification!: string;
-
-    @Prop({
-        required: true,
-        min: 0,
-    })
-    price!: number;
+    image!: true;
 
     @Prop({
         required: true
     })
-    category!: string;
+    price!: Number;
 
     @Prop({
-        default: "/uploads/default.png"
+        type: [
+            {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "LabItem",
+            },
+        ],
+        default: [],
     })
-    image!: string;
+    labItems!: LabItem[];
 
-    @Prop({
-        default: true
-    })
-    isActive!: boolean;
+
 
  }
 
