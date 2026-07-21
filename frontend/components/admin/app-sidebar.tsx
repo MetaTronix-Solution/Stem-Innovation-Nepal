@@ -2,7 +2,13 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { BarChart3, Newspaper, ImageIcon, LogOut } from "lucide-react";
+import {
+  BarChart3,
+  Newspaper,
+  ImageIcon,
+  FlaskConical,
+  LogOut,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -22,36 +28,33 @@ const navItems = [
   { title: "Analytics", url: "/admin/analytics", icon: BarChart3 },
   { title: "Blog", url: "/admin/blog", icon: Newspaper },
   { title: "Gallery", url: "/admin/gallery", icon: ImageIcon },
+  { title: "Lab Setup", url: "/admin/lab-setup", icon: FlaskConical },
 ];
-
-
-
-
 
 export function AppSidebar() {
   const pathname = usePathname();
   const router = useRouter();
 
-const handleLogout = async (): Promise<void> => {
-  try {
-    const { data } = await api.post("/auth/logout");
+  const handleLogout = async (): Promise<void> => {
+    try {
+      const { data } = await api.post("/auth/logout");
 
-    console.log("Logout Response:", data);
+      console.log("Logout Response:", data);
 
-    if (data.success) {
-      router.replace("/admin/login");
-      router.refresh();
+      if (data.success) {
+        router.replace("/admin/login");
+        router.refresh();
+      }
+    } catch (error: unknown) {
+      if (error instanceof AxiosError) {
+        console.log("Status:", error.response?.status);
+        console.log("Data:", error.response?.data);
+        console.log("Message:", error.message);
+      } else {
+        console.log(error);
+      }
     }
-  } catch (error: unknown) {
-    if (error instanceof AxiosError) {
-      console.log("Status:", error.response?.status);
-      console.log("Data:", error.response?.data);
-      console.log("Message:", error.message);
-    } else {
-      console.log(error);
-    }
-  }
-}
+  };
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="px-3 py-4">
@@ -92,13 +95,10 @@ const handleLogout = async (): Promise<void> => {
       <SidebarFooter>
         <SidebarMenu>
           <SidebarMenuItem>
-            <SidebarMenuButton
-  onClick={handleLogout}
-  tooltip="Log out"
->
-  <LogOut />
-  <span>Log out</span>
-</SidebarMenuButton>
+            <SidebarMenuButton onClick={handleLogout} tooltip="Log out">
+              <LogOut />
+              <span>Log out</span>
+            </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarFooter>
