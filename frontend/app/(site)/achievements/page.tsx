@@ -1,12 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import {
-  School,
-  GraduationCap,
-  Users,
-  Trophy,
-  CheckCircle,
-  ArrowRight,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { School, GraduationCap, Users, Trophy } from "lucide-react";
 import { achievements } from "@/lib/data";
 
 const stats = [
@@ -32,7 +28,127 @@ const stats = [
   },
 ];
 
+// Splits "5000+" into { number: 5000, suffix: "+" } so we can animate
+// just the numeric part and re-attach whatever trails it (+, %, etc).
+function parseValue(raw: string) {
+  const match = raw.match(/^([\d,.]+)(.*)$/);
+  if (!match) return { number: 0, suffix: raw };
+  const number = parseFloat(match[1].replace(/,/g, ""));
+  return { number, suffix: match[2] };
+}
+
+// Gradual, readable curve — starts with visible motion and eases
+// smoothly into the final number instead of front-loading the jump.
+function easeOutCubic(t: number) {
+  return 1 - Math.pow(1 - t, 3);
+}
+
+// Bigger numbers get a longer runway so each step stays visible instead
+// of "5000+" blurring past in the same time as "10+".
+function durationForTarget(target: number) {
+  const base = 250;
+  const scaled = Math.log10(target + 1) * 120;
+  return Math.min(700, Math.max(base, base + scaled));
+}
+
+function useCountUp(target: number, active: boolean, delay = 0) {
+  const duration = durationForTarget(target);
+  const [value, setValue] = useState(0);
+  const frameRef = useRef<number | undefined>(undefined);
+
+  useEffect(() => {
+    if (!active) return;
+
+    const prefersReducedMotion =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReducedMotion) {
+      setValue(target);
+      return;
+    }
+
+    let start: number | null = null;
+
+    const tick = (now: number) => {
+      if (start === null) start = now;
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = easeOutCubic(progress);
+      setValue(Math.round(eased * target));
+
+      if (progress < 1) {
+        frameRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    const timeoutId = window.setTimeout(() => {
+      frameRef.current = requestAnimationFrame(tick);
+    }, delay);
+
+    return () => {
+      window.clearTimeout(timeoutId);
+      if (frameRef.current) cancelAnimationFrame(frameRef.current);
+    };
+  }, [active, target, duration, delay]);
+
+  return value;
+}
+
+function StatCard({
+  icon: Icon,
+  value,
+  label,
+  active,
+  delay,
+}: {
+  icon: typeof School;
+  value: string;
+  label: string;
+  active: boolean;
+  delay: number;
+}) {
+  const { number, suffix } = parseValue(value);
+  const count = useCountUp(number, active, delay);
+
+  return (
+    <div className="rounded-3xl bg-white p-8 text-center shadow-lg transition duration-300 hover:-translate-y-2">
+      <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-orange/10">
+        <Icon className="h-8 w-8 text-orange" />
+      </div>
+
+      <h3 className="mt-6 text-4xl font-bold text-navy tabular-nums">
+        {count.toLocaleString()}
+        {suffix}
+      </h3>
+
+      <p className="mt-2 text-slate">{label}</p>
+    </div>
+  );
+}
+
 export default function Achievements() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [statsInView, setStatsInView] = useState(false);
+
+  useEffect(() => {
+    const node = sectionRef.current;
+    if (!node) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsInView(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.3 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section className="bg-light-gray py-24">
       <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -56,27 +172,20 @@ export default function Achievements() {
         </div>
 
         {/* Statistics */}
-        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((item, index) => {
-            const Icon = item.icon;
-
-            return (
-              <div
-                key={index}
-                className="rounded-3xl bg-white p-8 text-center shadow-lg transition duration-300 hover:-translate-y-2"
-              >
-                <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-orange/10">
-                  <Icon className="h-8 w-8 text-orange" />
-                </div>
-
-                <h3 className="mt-6 text-4xl font-bold text-navy">
-                  {item.value}
-                </h3>
-
-                <p className="mt-2 text-slate">{item.label}</p>
-              </div>
-            );
-          })}
+        <div
+          ref={sectionRef}
+          className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        >
+          {stats.map((item, index) => (
+            <StatCard
+              key={item.label}
+              icon={item.icon}
+              value={item.value}
+              label={item.label}
+              active={statsInView}
+              delay={index * 120}
+            />
+          ))}
         </div>
 
         {/* Timeline */}
