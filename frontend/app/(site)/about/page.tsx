@@ -108,7 +108,7 @@ export default function AboutPage() {
             <div className="relative h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40 lg:h-44 lg:w-44">
               <Image
                 src="/images/ceo.jpeg"
-                alt="Siddhartha Yadav, CEO of Stem Innovation Nepal"
+                alt="Siddhartha Kumar Yadav, CEO of STEAM Innovation Nepal"
                 fill
                 className="object-cover object-top"
                 sizes="(min-width: 1024px) 176px, (min-width: 640px) 160px, 128px"
@@ -117,10 +117,10 @@ export default function AboutPage() {
             </div>
 
             <h3 className="mt-6 text-3xl font-semibold text-charcoal">
-              Siddhartha Yadav
+              Siddhartha Kumar Yadav
             </h3>
 
-            <p className="mt-2 text-blue">Chief Executive Officer</p>
+            <p className="mt-2 text-blue">Chief Executive Officer (CEO)</p>
           </div>
 
           <div className="border border-gray-200 bg-white p-10 shadow-sm">
@@ -129,21 +129,54 @@ export default function AboutPage() {
             </p>
 
             <blockquote className="mt-6 space-y-6 text-xl leading-10 text-charcoal">
-              <p>
-                "When students get to wire their first sensor or watch a robot
-                they built respond to their own code, something changes STEM
-                stops being a subject on a timetable and becomes something they
-                own."
+              <p className="font-semibold not-italic text-charcoal">
+                Welcome to STEAM Innovation Nepal.
               </p>
 
               <p>
-                "Our goal at Stem Innovation Nepal is simple: give every school
-                and college we work with the tools, curriculum, and hands on
-                time to make that moment happen for as many students as
-                possible. That's the vision we're building toward across
-                Kathmandu and, eventually, the rest of Nepal."
+                At STEAM Innovation Nepal, we believe that education should
+                inspire curiosity, creativity, and innovation. Our mission is
+                to empower learners with the knowledge and practical skills
+                needed to succeed in the digital era. By integrating Science,
+                Technology, Engineering, Arts, and Mathematics (STEAM) with
+                emerging technologies such as Artificial Intelligence, IoT,
+                Robotics, Coding, 3D Printing, and Digital Fabrication, we
+                prepare students to become future innovators and
+                problem-solvers.
+              </p>
+
+              <p>
+                We are committed to transforming education through
+                project-based learning, modern STEAM laboratories,
+                industry-relevant training, and strong partnerships with
+                schools, universities, government agencies, and
+                organizations. Our goal is not only to teach technology but
+                also to cultivate critical thinking, creativity,
+                collaboration, and an entrepreneurial mindset.
+              </p>
+
+              <p>
+                As we continue to grow, our vision is to establish Nepal as a
+                regional leader in STEAM education and innovation, creating
+                opportunities for young people to compete and collaborate on
+                a global stage.
+              </p>
+
+              <p>
+                Thank you for visiting STEAM Innovation Nepal. We invite you
+                to join us in shaping the future of education through
+                innovation and technology.
               </p>
             </blockquote>
+
+            <div className="mt-8 not-italic text-charcoal">
+              <p className="text-lg">Sincerely,</p>
+              <p className="mt-1 text-lg font-semibold">
+                Siddhartha Kumar Yadav
+              </p>
+              <p className="text-blue">Chief Executive Officer (CEO)</p>
+              <p className="text-slate">STEAM Innovation Nepal</p>
+            </div>
           </div>
         </div>
       </section>
