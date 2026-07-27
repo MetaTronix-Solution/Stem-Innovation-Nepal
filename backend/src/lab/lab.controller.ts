@@ -92,7 +92,7 @@ export class LabController {
 
   //Delete Lab Setup
 
-  @Delete("id")
+  @Delete(":id")
   remove(@Param("id") id: string) {
     return this.labService.remove(id);
   }
