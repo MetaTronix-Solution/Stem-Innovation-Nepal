@@ -1,4 +1,4 @@
-import { LabItem } from "@/types/lab-item";
+import { LabItem } from "@/types/lab";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 

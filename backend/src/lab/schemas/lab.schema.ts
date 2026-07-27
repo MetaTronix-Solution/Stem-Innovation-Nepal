@@ -31,7 +31,7 @@ export type LabDocument = HydratedDocument<Lab>;
     @Prop({
         required: true
     })
-    price!: Number;
+    price!: number;
 
     @Prop({
         type: [
