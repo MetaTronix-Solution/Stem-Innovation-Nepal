@@ -238,3 +238,131 @@ export const galleryItems = [
 // `video` field (embed URL) — render an <iframe> in place of the image
 // when present.
 
+
+export const services = [
+  {
+    slug: "steam-education",
+    title: "STEAM Education (K–12)",
+    description:
+      "We offer a comprehensive STEAM curriculum aligned with international educational practices and adapted to local learning needs. Our programs emphasize experiential learning through real-world projects, design thinking, and interdisciplinary education.",
+    tiers: [
+      {
+        label: "Class 1–4: Foundation STEAM",
+        topics: [
+          "Creative problem-solving",
+          "Basic robotics",
+          "Computational thinking",
+          "Visual programming",
+          "Science experiments",
+          "Engineering design challenges",
+        ],
+      },
+      {
+        label: "Class 5–10: Intermediate STEAM",
+        topics: [
+          "IoT fundamentals",
+          "Robotics and automation",
+          "Python programming",
+          "Artificial Intelligence fundamentals",
+          "3D design and printing",
+          "Electronics and embedded systems",
+          "Project-based innovation",
+        ],
+      },
+      {
+        label: "Class 11–12: Advanced STEAM",
+        topics: [
+          "Advanced IoT systems",
+          "Embedded systems",
+          "Artificial Intelligence and Machine Learning",
+          "Product development",
+          "Engineering design",
+          "Research and innovation projects",
+          "Industry-oriented capstone projects",
+        ],
+      },
+    ],
+  },
+  {
+    slug: "app-web-development",
+    title: "App and Web Development Training",
+    description:
+      "Our software development programs equip learners with practical skills to design, develop, and deploy modern digital applications.",
+    topics: [
+      "Website Development",
+      "Frontend Development",
+      "Backend Development",
+      "Mobile App Development",
+      "UI/UX Design Fundamentals",
+      "Database Management",
+      "API Integration",
+      "Deployment and Cloud Fundamentals",
+    ],
+  },
+  {
+    slug: "iot-robotics",
+    title: "IoT and Robotics Training",
+    description:
+      "Our IoT and Robotics programs provide hands-on experience in designing intelligent systems using modern hardware and software platforms.",
+    topics: [
+      "Arduino Programming",
+      "ESP32 Development",
+      "Raspberry Pi Applications",
+      "Embedded Systems",
+      "Robotics Design",
+      "Sensors and Actuators",
+      "Wireless Communication",
+      "Automation Systems",
+      "Smart Home Solutions",
+      "Industrial IoT",
+      "AI-enabled Robotics",
+    ],
+    note: "Participants build real-world projects that strengthen their engineering, programming, and innovation skills.",
+  },
+  {
+    slug: "smart-hospitality",
+    title: "Smart Hospitality Training",
+    description:
+      "Designed specifically for Hotel Management (HM) students, this program introduces emerging technologies transforming the hospitality industry.",
+    topics: [
+      "Smart Hotel Technologies",
+      "IoT in Hospitality",
+      "Hotel Automation Systems",
+      "AI Applications in Hospitality",
+      "Digital Guest Experience",
+      "Smart Room Management",
+      "Contactless Technologies",
+      "Hospitality Innovation",
+      "Future Hospitality Trends",
+    ],
+    note: "The program prepares students to meet the evolving demands of the global hospitality sector through technology-driven solutions.",
+  },
+  {
+    slug: "digital-fabrication",
+    title: "Digital Fabrication & Innovation Lab",
+    description:
+      "We provide practical training using modern fabrication technologies that transform ideas into functional prototypes.",
+    topics: [
+      "3D Printing",
+      "3D Modeling and CAD Design",
+      "Laser Cutting and Engraving",
+      "Rapid Prototyping",
+      "Product Design",
+      "Prototype Development",
+      "Digital Manufacturing",
+      "Maker Education",
+    ],
+  },
+];
+
+export const whyChooseUs = [
+  "Project-Based Learning Approach",
+  "Industry-Relevant Curriculum",
+  "Experienced Trainers and Mentors",
+  "Hands-On Practical Sessions",
+  "Modern Laboratory and Equipment",
+  "Innovation and Entrepreneurship Focus",
+  "Future-Ready Digital Skills",
+  "Customized Training for Schools, Colleges, and Organizations",
+  "Research and Product Development Support",
+];
