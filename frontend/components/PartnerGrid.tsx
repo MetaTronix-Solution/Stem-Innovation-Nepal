@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import { partnerSchools } from "@/lib/data";
 
@@ -8,6 +9,7 @@ type FilterKey = "All" | "School" | "College";
 export default function PartnerGrid() {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState<FilterKey>("All");
+  const [brokenLogos, setBrokenLogos] = useState<Set<string>>(new Set());
 
   const results = useMemo(() => {
     return partnerSchools.filter((p) => {
@@ -58,28 +60,46 @@ export default function PartnerGrid() {
       </p>
 
       <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-        {results.map((p) => (
-          <div
-            key={p.name}
-            className="flex flex-col items-center justify-center gap-3 rounded-sm border border-charcoal/10 bg-white px-4 py-8 text-center transition hover:border-teal hover:shadow-md"
-          >
+        {results.map((p) => {
+          const logoBroken = brokenLogos.has(p.name);
+          return (
             <div
-              className="flex h-12 w-12 items-center justify-center rounded-full bg-navy/5 font-display text-sm font-semibold text-navy"
-              aria-hidden="true"
+              key={p.name}
+              className="flex flex-col items-center justify-center gap-3 rounded-sm border border-charcoal/10 bg-white px-4 py-8 text-center transition hover:border-teal hover:shadow-md"
             >
-              {p.name
-                .split(" ")
-                .slice(0, 2)
-                .map((w) => w[0])
-                .join("")}
+              {!logoBroken ? (
+                <div className="flex h-16 w-16 items-center justify-center">
+                  <Image
+                    src={p.logo}
+                    alt={`${p.name} logo`}
+                    width={64}
+                    height={64}
+                    className="h-full w-full object-contain"
+                    onError={() =>
+                      setBrokenLogos((prev) => new Set(prev).add(p.name))
+                    }
+                  />
+                </div>
+              ) : (
+                <div
+                  className="flex h-12 w-12 items-center justify-center rounded-full bg-navy/5 font-display text-sm font-semibold text-navy"
+                  aria-hidden="true"
+                >
+                  {p.name
+                    .split(" ")
+                    .slice(0, 2)
+                    .map((w) => w[0])
+                    .join("")}
+                </div>
+              )}
+              <p className="text-sm font-medium text-charcoal">{p.name}</p>
+              <span className="eyebrow text-[10px] text-blue">{p.type}</span>
             </div>
-            <p className="text-sm font-medium text-charcoal">{p.name}</p>
-            <span className="eyebrow text-[10px] text-blue">{p.type}</span>
-          </div>
-        ))}
+          );
+        })}
         {results.length === 0 && (
           <p className="col-span-full py-10 text-center text-sm text-slate">
-            No institutions match “{query}”. Try a different search.
+            No institutions match "{query}". Try a different search.
           </p>
         )}
       </div>
