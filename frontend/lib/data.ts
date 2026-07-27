@@ -61,25 +61,39 @@ export const programs = [
   },
 ];
 
-export const partnerSchools = [
-  { name: "Rato Bangala School", type: "School" },
-  { name: "Kathmandu Model Secondary School", type: "School" },
-  { name: "Ullens School", type: "School" },
-  { name: "Gems International School", type: "School" },
-  { name: "Little Angels' School", type: "School" },
-  { name: "Malpi International School", type: "School" },
-  { name: "Bal Mandir Higher Secondary", type: "School" },
-  { name: "Trinity International School", type: "School" },
-  { name: "Global Vision School", type: "School" },
-  { name: "Sagarmatha Secondary School", type: "School" },
-  { name: "St. Xavier's School, Jawalakhel", type: "School" },
-  { name: "Deerwalk Institute of Technology", type: "College" },
-  { name: "Kathmandu University", type: "College" },
-  { name: "Pulchowk Campus, IOE", type: "College" },
-  { name: "Patan Multiple Campus", type: "College" },
-  { name: "Islington College", type: "College" },
-];
+export type Partner = {
+  name: string;
+  type: "School" | "College";
+  logo: string;
+};
 
+export const partnerSchools: Partner[] = [
+  // Schools
+  { name: "Siddhartha Vidyapith", type: "School", logo: "/images/siddharth.png" },
+  { name: "Marvellous E.B.S", type: "School", logo: "/images/marvellous.png" },
+  { name: "Rainbow E. Secondary School", type: "School", logo: "/images/rainbow.png" },
+  { name: "Candid Career Secondary School", type: "School", logo: "/images/candid.png" },
+  { name: "Jugal School", type: "School", logo: "/images/jugal.png" },
+  { name: "Mega Public School", type: "School", logo: "/images/mega.png" },
+  { name: "Rajan Memorial International School", type: "School", logo: "/images/rajan.png" },
+  { name: "Prasiddha Model School", type: "School", logo: "/images/prasiddha.png" },
+  { name: "North Valley English Secondary School", type: "School", logo: "/images/northvalley.png" },
+  { name: "Jeevan Jyoti E.B.S", type: "School", logo: "/images/jeevan.png" },
+  { name: "Pragati Adarsha English School", type: "School", logo: "/images/pragati.png" },
+  { name: "Paradise School, Sanepa", type: "School", logo: "/images/paradise.png" },
+  { name: "Tri-Star English Secondary School", type: "School", logo: "/images/triStar.png" },
+  { name: "Himchuli Academy", type: "School", logo: "/images/himchuli.png" },
+  { name: "Nirmal Jyoti English School", type: "School", logo: "/images/nirmalJyoti.png" },
+  { name: "Mitra Pathasala", type: "School", logo: "/images/mitraPathsala.png" },
+  { name: "Maitri School", type: "School", logo: "/images/maitri.png" },
+  { name: "NCCS School", type: "School", logo: "/images/nccs.png" },
+  { name: "Akshar Academy", type: "School", logo: "/images/akshar.png" },
+
+  // Colleges
+  { name: "Aryan School of Engineering and Management", type: "College", logo: "/images/aryan.png" },
+  { name: "Nist College, Lainchaur", type: "College", logo: "/images/nist.png" },
+  { name: "Universal College, Maitidevi", type: "College", logo: "/images/universal.png" },
+];
 export const testimonials = [
   {
     quote:
@@ -223,3 +237,4 @@ export const galleryItems = [
 // Video embeds (e.g. YouTube) can be added per-item with an optional
 // `video` field (embed URL) — render an <iframe> in place of the image
 // when present.
+
