@@ -23,7 +23,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
 import { labItemService } from "@/services/lab-item.service";
-import { LabItem } from "@/types/lab-item";
+import { LabItem } from "@/types/lab";
 import { toast } from "sonner";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
@@ -230,7 +230,7 @@ export default function LabSetupPage() {
                 </div>
               </div>
 
-              <div className="space-y-1.5">
+              {/* <div className="space-y-1.5">
                 <Label htmlFor="category">Category ID</Label>
                 <Input
                   id="category"
@@ -238,7 +238,7 @@ export default function LabSetupPage() {
                   onChange={(e) => setCategory(e.target.value)}
                   placeholder="Paste LabCategory ObjectId (temporary until dropdown is wired)"
                 />
-              </div>
+              </div> */}
 
               <div className="space-y-1.5">
                 <Label htmlFor="image">
