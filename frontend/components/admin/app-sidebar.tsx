@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { BarChart3, Newspaper, ImageIcon, FlaskConical, LogOut } from "lucide-react";
+import { BarChart3, Newspaper, ImageIcon, LogOut } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -22,7 +22,6 @@ const navItems = [
   { title: "Analytics", url: "/admin/analytics", icon: BarChart3 },
   { title: "Blog", url: "/admin/blog", icon: Newspaper },
   { title: "Gallery", url: "/admin/gallery", icon: ImageIcon },
-  { title: "Lab Setup", url: "/admin/lab", icon: FlaskConical },
 ];
 
 export function AppSidebar() {
@@ -35,21 +34,20 @@ export function AppSidebar() {
 
       console.log("Logout Response:", data);
 
-      if (data.success) {
-        router.replace("/admin/login");
-        router.refresh();
-      }
-    } catch (error: unknown) {
-      if (error instanceof AxiosError) {
-        console.log("Status:", error.response?.status);
-        console.log("Data:", error.response?.data);
-        console.log("Message:", error.message);
-      } else {
-        console.log(error);
-      }
+    if (data.success) {
+      router.replace("/admin/login");
+      router.refresh();
     }
-  };
-
+  } catch (error: unknown) {
+    if (error instanceof AxiosError) {
+      console.log("Status:", error.response?.status);
+      console.log("Data:", error.response?.data);
+      console.log("Message:", error.message);
+    } else {
+      console.log(error);
+    }
+  }
+}
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader className="px-3 py-4">

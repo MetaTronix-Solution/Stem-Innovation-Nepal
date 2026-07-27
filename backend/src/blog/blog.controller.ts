@@ -24,6 +24,32 @@ import { GetAdmin } from 'src/auth/decorators/get-admin.decorator';
 export class BlogController {
   constructor(private readonly blogService: BlogService) {}
 
+  //Public
+
+  @Get()
+  findAllPublished() {
+    return this.blogService.findPublishedBlogs();
+  }
+
+  @Get(':id')
+  findOnePublished(@Param('id') id: string) {
+    return this.blogService.findOnePublishedBlog(id);
+  }
+
+  //Private
+
+  @Get('admin/all')
+  @UseGuards(JwtAuthGuard)
+  findAll() {
+    return this.blogService.findAllBlogs();
+  }
+
+  @Get('admin/:id')
+  @UseGuards(JwtAuthGuard)
+  findOne(@Param('id') id: string) {
+    return this.blogService.findOneBlog(id);
+  }
+
   @Post()
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(FileInterceptor('image', multerOptions('blog')))
@@ -37,17 +63,6 @@ export class BlogController {
       throw new BadRequestException('Image is required');
     }
     return this.blogService.createBlog(createBlogDto, file, admin?.name);
-  }
-
-  @Get()
-  findAll() {
-    return this.blogService.findAllBlogs();
-  }
-
-  @Get(':id')
-  @UseGuards(JwtAuthGuard)
-  findOne(@Param('id') id: string) {
-    return this.blogService.findOneBlog(id);
   }
 
   @Patch(':id')
