@@ -11,6 +11,7 @@ const navItems = [
   { name: "Programs", href: "/programs" },
   { name: "About", href: "/about" },
   { name: "Partners", href: "/partners" },
+  { name: "Blog", href: "/blog" },
   { name: "Gallery", href: "/gallery" },
   { name: "Lab Setup", href: "/user/labs" },
 ];
@@ -183,5 +184,3 @@ export default function Navbar() {
     </header>
   );
 }
-
-
