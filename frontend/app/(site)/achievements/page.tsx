@@ -190,13 +190,13 @@ export default function Achievements() {
 
         {/* Timeline */}
         <div className="mt-24">
-          <div className="mx-auto max-w-3xl">
+          <div className="mx-auto max-w-5xl">
             <div className="mb-16 text-center">
               <h3 className="text-3xl font-bold text-charcoal md:text-4xl">
                 Our Journey
               </h3>
 
-              <p className="mt-4 leading-8 text-slate">
+              <p className="mx-auto mt-4 max-w-2xl leading-8 text-slate">
                 Every partnership, workshop, and milestone represents another
                 step toward empowering students through practical STEM
                 education.
@@ -205,30 +205,47 @@ export default function Achievements() {
 
             <div className="relative">
               {/* Vertical Line */}
-              <div className="absolute left-3 top-2 bottom-2 w-px bg-gray-300" />
+              <div className="absolute left-3 top-2 bottom-2 w-px bg-gray-300 md:left-1/2 md:-translate-x-1/2" />
 
               <div className="space-y-12">
-                {achievements.map((item) => (
-                  <div key={item.title} className="relative flex gap-6">
-                    {/* Circle */}
-                    <div className="relative z-10 mt-1 h-6 w-6 rounded-full border-2 border-orange bg-white" />
-
-                    {/* Content */}
-                    <div className="pb-2">
+                {achievements.map((item, index) => {
+                  const isEven = index % 2 === 0;
+                  const content = (
+                    <div
+                      className={`pl-12 md:pl-0 ${isEven ? "md:text-right" : ""}`}
+                    >
                       <p className="text-xs font-semibold uppercase tracking-[0.3em] text-teal">
                         {item.year}
                       </p>
-
                       <h4 className="mt-2 text-2xl font-bold text-charcoal">
                         {item.title}
                       </h4>
-
-                      <p className="mt-3 max-w-2xl leading-8 text-slate">
+                      <p className="mt-3 leading-8 text-slate">
                         {item.description}
                       </p>
                     </div>
-                  </div>
-                ))}
+                  );
+
+                  return (
+                    <div
+                      key={item.title}
+                      className="relative md:flex md:items-start"
+                    >
+                      {/* Circle */}
+                      <div className="absolute left-3 top-1 z-10 h-6 w-6 -translate-x-1/2 rounded-full border-2 border-orange bg-white md:left-1/2" />
+
+                      <div className="w-full md:flex md:w-full">
+                        <div className="hidden md:block md:w-1/2 md:pr-12">
+                          {isEven && content}
+                        </div>
+                        <div className="hidden md:block md:w-1/2 md:pl-12">
+                          {!isEven && content}
+                        </div>
+                        <div className="md:hidden">{content}</div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </div>
           </div>
