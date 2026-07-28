@@ -23,8 +23,8 @@ export default function GalleryLightbox() {
       .then(setItems)
       .catch(() =>
         setError(
-          "The gallery didn't load. Check your connection and try again."
-        )
+          "The gallery didn't load. Check your connection and try again.",
+        ),
       )
       .finally(() => setLoading(false));
   }, []);
@@ -59,19 +59,14 @@ export default function GalleryLightbox() {
 
   return (
     <>
-      <div className="mb-8 flex items-center justify-between border-b border-gray-100 pb-6">
-        <p className="text-sm text-gray-500">
-          <span className="font-semibold text-navy">{items.length}</span>{" "}
-          {items.length === 1 ? "photo" : "photos"} from our workshops
-        </p>
-      </div>
-
-      <div className="columns-1 gap-6 [column-fill:_balance] sm:columns-2 lg:columns-3">
+      <div className="mt-24 columns-1 gap-6 [column-fill:_balance] sm:columns-2 lg:columns-3">
         {items.map((item, index) => (
           <button
             key={item._id}
             onClick={() => setActiveIndex(index)}
-            style={{ aspectRatio: ASPECT_PATTERN[index % ASPECT_PATTERN.length] }}
+            style={{
+              aspectRatio: ASPECT_PATTERN[index % ASPECT_PATTERN.length],
+            }}
             className="group relative mb-6 block w-full overflow-hidden rounded-2xl bg-gray-100 shadow-sm ring-1 ring-black/5 transition duration-300 hover:shadow-lg hover:ring-black/10"
           >
             <Image
@@ -144,7 +139,7 @@ function Lightbox({
 
   useEffect(() => {
     const active = filmstripRef.current?.querySelector<HTMLElement>(
-      `[data-index="${activeIndex}"]`
+      `[data-index="${activeIndex}"]`,
     );
     active?.scrollIntoView({
       behavior: "smooth",
@@ -301,7 +296,12 @@ function ExpandIcon(props: React.SVGProps<SVGSVGElement>) {
 function CloseIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18 18 6M6 6l12 12" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="M6 18 18 6M6 6l12 12"
+      />
     </svg>
   );
 }
@@ -309,7 +309,12 @@ function CloseIcon(props: React.SVGProps<SVGSVGElement>) {
 function ChevronIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg fill="none" viewBox="0 0 24 24" stroke="currentColor" {...props}>
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m9 18 6-6-6-6" />
+      <path
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth={2}
+        d="m9 18 6-6-6-6"
+      />
     </svg>
   );
 }
