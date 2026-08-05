@@ -2,6 +2,12 @@ import Image from "next/image";
 
 const teamMembers = [
   {
+    name: "Mr. Raju Shrestha",
+    role: "Advisor",
+    image: "/images/teams/raju.png",
+    bio: "CEO of Nepatronix Engineering Solution since 2021 and a seasoned tech entrepreneur. Co-author of STEAM Starter, he advises on innovation, entrepreneurship, and educational transformation.",
+  },
+  {
     name: "Er. Siddhartha Yadav",
     role: "Chief Executive Officer (CEO)",
     image: "/images/teams/ceo.jpeg",
@@ -13,12 +19,7 @@ const teamMembers = [
     image: "/images/teams/ronit.jpeg",
     bio: "Leads software development and digital innovation with over six years of experience building scalable, user-centric applications, including INNOVATOR and Bishawas.",
   },
-  {
-    name: "Mr. Raju Shrestha",
-    role: "Advisor",
-    image: "/images/teams/raju.png",
-    bio: "CEO of Nepatronix Engineering Solution since 2021 and a seasoned tech entrepreneur. Co-author of STEAM Starter, he advises on innovation, entrepreneurship, and educational transformation.",
-  },
+
   {
     name: "Sunil Rana Magar",
     role: "Robotics & AI Trainer",
@@ -46,18 +47,18 @@ const teamMembers = [
   {
     name: "Er. Rusha Dahal",
     role: "STEAM Educator",
-    image: "/images/teams/rusha-dahal.jpeg",
+    image: "/images/teams/rusha.jpeg",
     bio: "STEAM Educator with over two years of experience delivering hands-on learning, curriculum development, and project mentoring for students.",
   },
   {
     name: "Er. Chandani Jha",
     role: "STEAM Educator",
-    image: "/images/teams/chandani-jha.jpeg",
+    image: "/images/teams/chandani.jpeg",
     bio: "STEAM Educator focused on project-based learning across science, technology, engineering, arts, and mathematics, with hands-on curriculum delivery.",
   },
   {
     name: "Sima",
-    role: "STEM Program Coordinator",
+    role: "STEM Educator",
     image: "/images/teams/sima.jpeg",
     bio: "Guiding students in programming, electronics and technology innovation through hands-on workshops.",
   },
