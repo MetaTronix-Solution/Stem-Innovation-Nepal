@@ -4,8 +4,6 @@ import type { Blog } from "@/types/blog";
 
 export const revalidate = 60;
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 function formatDate(dateStr: string) {
   return new Date(dateStr).toLocaleDateString("en-US", {
     month: "long",
@@ -64,7 +62,7 @@ export default async function BlogPage() {
               >
                 <div className="aspect-[16/10] overflow-hidden relative">
                   <img
-                    src={`${API_URL}${post.imageUrl}`}
+                    src={post.imageUrl}
                     alt={post.title}
                     className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />

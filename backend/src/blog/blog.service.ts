@@ -9,26 +9,35 @@ import { Model } from 'mongoose';
 import { Blog } from './schemas/blog.schema';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
+import { ImagekitService } from 'src/imageKit/imagekit.service';
 
 @Injectable()
 export class BlogService {
   constructor(
     @InjectModel(Blog.name)
     private readonly blogModel: Model<Blog>,
+
+    private readonly imagekitService: ImagekitService
   ) {}
+
+  //create blog
   async createBlog(
     createBlogDto: CreateBlogDto,
     file: Express.Multer.File,
     author: string,
   ) {
     try {
-      const imageUrl = `/uploads/blog/${file.filename}`;
+      const uploadedImage = await this.imagekitService.uploadFile(
+  file,
+  "/blog",
+);
 
-      const blog = await this.blogModel.create({
-        ...createBlogDto,
-        imageUrl,
-        author,
-      });
+const blog = await this.blogModel.create({
+  ...createBlogDto,
+  imageUrl: uploadedImage.url,
+  imageFileId: uploadedImage.fileId,
+  author,
+});
 
       return {
         success: true,
@@ -83,8 +92,13 @@ export class BlogService {
     };
 
     if (file) {
-      updateData.imageUrl = `/uploads/blog/${file.filename}`;
-    }
+    const uploadedImage = await this.imagekitService.uploadFile(
+    file,
+    "blog",
+    );
+
+  updateData.imageUrl = uploadedImage.url;
+}
 
     const updatedBlog = await this.blogModel.findByIdAndUpdate(id, updateData, {
       new: true,
@@ -103,15 +117,22 @@ export class BlogService {
   }
 
   async deleteBlog(id: string) {
-    const blog = await this.blogModel.findByIdAndDelete(id);
+    const blog = await this.blogModel.findById(id);
 
     if (!blog) {
-      throw new NotFoundException('Blog not found');
+    throw new NotFoundException("Blog not found");
     }
 
-    return {
-      success: true,
-      message: 'Blog deleted successfully',
-    };
+    // delete image from ImageKit
+   if (blog.imageFileId) {
+  await this.imagekitService.deleteFile(blog.imageFileId);
+}
+
+await blog.deleteOne();
+
+return {
+  success: true,
+  message: "Blog deleted successfully",
+};
   }
 }

@@ -29,15 +29,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import api from "@/lib/axios";
-
-interface GalleryImage {
-  _id: string;
-  image: string;
-  caption: string;
-}
+import { GalleryItem } from "@/types/gallery";
 
 export default function GalleryPage() {
-  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [images, setImages] = useState<GalleryItem[]>([]);
   const [fetching, setFetching] = useState(true);
 
   const [open, setOpen] = useState(false);
@@ -47,7 +42,7 @@ export default function GalleryPage() {
   const [loading, setLoading] = useState(false);
 
   // Image queued for deletion — drives the confirmation dialog. Null = closed.
-  const [pendingDelete, setPendingDelete] = useState<GalleryImage | null>(null);
+  const [pendingDelete, setPendingDelete] = useState<GalleryItem | null>(null);
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -278,7 +273,7 @@ export default function GalleryPage() {
                 className="group relative aspect-square overflow-hidden rounded-xl border bg-muted shadow-sm transition-shadow hover:shadow-md"
               >
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_API_URL}${img.image}`}
+                  src={img.image}
                   alt={img.caption}
                   fill
                   unoptimized

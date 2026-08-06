@@ -1,6 +1,5 @@
-// lib/gallery.ts
-import {  GalleryItem} from "@/types/gallery";
-import  api from "@/lib/axios"
+import { GalleryItem } from "@/types/gallery";
+import api from "@/lib/axios";
 
 interface GalleryResponse {
   success: boolean;

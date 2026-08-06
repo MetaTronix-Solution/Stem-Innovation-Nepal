@@ -3,6 +3,7 @@ import { GalleryController } from './gallery.controller';
 import { GalleryService } from './gallery.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Gallery, GallerySchema } from './schemas/gallery.schema';
+import { ImagekitModule } from 'src/imageKit/imagekit.module';
 
 @Module({
 
@@ -12,7 +13,8 @@ import { Gallery, GallerySchema } from './schemas/gallery.schema';
         name: Gallery.name,
         schema: GallerySchema,
       }
-    ])
+    ]),
+    ImagekitModule
   ],
   controllers: [GalleryController],
   providers: [GalleryService]
