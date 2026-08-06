@@ -1,12 +1,12 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { LabItem, LabItemDocument } from 'src/lab-item/schemas/lab-item.schema';
+import { LabItem, LabItemDocument } from '../lab-item/schemas/lab-item.schema';
 import { Lab, LabDocument } from './schemas/lab.schema';
 import { CreateLabDto } from './dto/create-lab.dto';
 import { UpdateLabDto } from './dto/update-lab.dto';
-import { ImagekitModule } from 'src/imageKit/imagekit.module';
-import { ImagekitService } from 'src/imageKit/imagekit.service';
+import { ImagekitModule } from '../imageKit/imagekit.module';
+import { ImagekitService } from '../imageKit/imagekit.service';
 
 
 
