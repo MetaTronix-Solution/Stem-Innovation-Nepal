@@ -1,18 +1,14 @@
 import type { NextConfig } from "next";
 
-// next.config.ts
 const nextConfig: NextConfig = {
   images: {
-    unoptimized: true,
     remotePatterns: [
       {
-        protocol: "http",
-        hostname: "localhost",
-        port: "4000",
-        pathname: "/uploads/**",
+        protocol: "https",
+        hostname: "ik.imagekit.io",
       },
     ],
   },
 };
 
-export default nextConfig
+export default nextConfig;

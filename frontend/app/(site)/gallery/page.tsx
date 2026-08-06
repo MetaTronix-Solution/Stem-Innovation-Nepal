@@ -6,8 +6,6 @@ import Image from "next/image";
 import { getGalleryItems } from "@/lib/gallery";
 import { GalleryItem } from "@/types/gallery";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 // Cycle through a few aspect ratios so the masonry grid doesn't look
 // uniform — real workshop photos aren't all the same shape.
 const ASPECT_PATTERN = [4 / 5, 4 / 3, 1, 3 / 4, 4 / 3, 4 / 5];
@@ -70,7 +68,7 @@ export default function GalleryLightbox() {
             className="group relative mb-6 block w-full overflow-hidden rounded-2xl bg-gray-100 shadow-sm ring-1 ring-black/5 transition duration-300 hover:shadow-lg hover:ring-black/10"
           >
             <Image
-              src={`${API_URL}${item.image}`}
+              src={item.image}
               alt={item.caption || "Workshop photo"}
               fill
               priority={index === 0}
@@ -190,8 +188,8 @@ function Lightbox({
           onClick={(e) => e.stopPropagation()}
         >
           <Image
-            src={`${API_URL}${item.image}`}
-            alt={item.caption || "Workshop photo"}
+            src={item.image}
+            alt={item.caption || "Gallery Image"}
             fill
             sizes="90vw"
             className="object-contain"
@@ -239,8 +237,8 @@ function Lightbox({
             }`}
           >
             <Image
-              src={`${API_URL}${thumb.image}`}
-              alt=""
+              src={thumb.image}
+              alt={thumb.caption || ""}
               fill
               sizes="80px"
               className="object-cover"

@@ -27,8 +27,6 @@ import { blogService } from "@/services/blog.service";
 import { Blog } from "@/types/blog";
 import { toast } from "sonner";
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
 const TITLE_MIN = 5;
 const TITLE_MAX = 150;
 const CONTENT_MIN = 20;
@@ -253,7 +251,7 @@ export default function BlogPage() {
             <Card key={post._id} className="overflow-hidden">
               {post.imageUrl && (
                 <img
-                  src={`${API_URL}${post.imageUrl}`}
+                  src={post.imageUrl}
                   alt={post.title}
                   className="h-40 w-full object-cover"
                 />

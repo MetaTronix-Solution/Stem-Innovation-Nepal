@@ -8,7 +8,7 @@ export class Blog {
     required: true,
     trim: true,
     minlength: 5,
-    maxLength: 150,
+    maxlength: 150,
   })
   title!: string;
 
@@ -16,6 +16,12 @@ export class Blog {
     required: true,
   })
   imageUrl!: string;
+
+  // ImageKit File ID
+  @Prop({
+    required: true,
+  })
+  imageFileId!: string;
 
   @Prop({
     required: true,

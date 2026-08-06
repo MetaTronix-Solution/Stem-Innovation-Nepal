@@ -16,7 +16,7 @@ import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
 import { BlogService } from './blog.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { multerOptions } from 'src/common/multer/multer.config';
+import { memoryStorage } from "multer";
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { GetAdmin } from 'src/auth/decorators/get-admin.decorator';
 
@@ -52,7 +52,11 @@ export class BlogController {
 
   @Post()
   @UseGuards(JwtAuthGuard)
-  @UseInterceptors(FileInterceptor('image', multerOptions('blog')))
+  @UseInterceptors(
+  FileInterceptor("image", {
+    storage: memoryStorage(),
+  }),
+)
   createBlog(
     @Body() createBlogDto: CreateBlogDto,
     @UploadedFile() file: Express.Multer.File,
@@ -67,7 +71,11 @@ export class BlogController {
 
   @Patch(':id')
   @UseGuards(JwtAuthGuard)
-  @UseInterceptors(FileInterceptor('image', multerOptions('blog')))
+  @UseInterceptors(
+  FileInterceptor("image", {
+    storage: memoryStorage(),
+  }),
+  )
   update(
     @Param('id') id: string,
     @Body() updateBlogDto: UpdateBlogDto,
