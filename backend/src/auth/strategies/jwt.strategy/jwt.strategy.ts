@@ -3,7 +3,7 @@ import { InjectModel } from '@nestjs/mongoose';
 import { PassportStrategy } from '@nestjs/passport';
 import { Model } from 'mongoose';
 import { ExtractJwt, Strategy } from 'passport-jwt';
-import { Admin, AdminDocument } from 'src/admin/schemas/admin.schema';
+import { Admin, AdminDocument } from '../../../admin/schemas/admin.schema';
 
 const cookieExtractor = (req: any): string | null => {
   if (req && req.cookies) {

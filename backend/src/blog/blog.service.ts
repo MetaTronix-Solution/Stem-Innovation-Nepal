@@ -9,7 +9,7 @@ import { Model } from 'mongoose';
 import { Blog } from './schemas/blog.schema';
 import { CreateBlogDto } from './dto/create-blog.dto';
 import { UpdateBlogDto } from './dto/update-blog.dto';
-import { ImagekitService } from 'src/imageKit/imagekit.service';
+import { ImagekitService } from '../imageKit/imagekit.service';
 
 @Injectable()
 export class BlogService {

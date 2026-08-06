@@ -17,8 +17,8 @@ import { UpdateBlogDto } from './dto/update-blog.dto';
 import { BlogService } from './blog.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from "multer";
-import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
-import { GetAdmin } from 'src/auth/decorators/get-admin.decorator';
+import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
+import { GetAdmin } from '../auth/decorators/get-admin.decorator';
 
 @Controller('blog')
 export class BlogController {

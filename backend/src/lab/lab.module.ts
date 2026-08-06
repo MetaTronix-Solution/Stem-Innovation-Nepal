@@ -3,8 +3,8 @@ import { LabController } from './lab.controller';
 import { LabService } from './lab.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Lab, LabSchema } from './schemas/lab.schema';
-import { LabItem, LabItemSchema } from 'src/lab-item/schemas/lab-item.schema';
-import { ImagekitModule } from 'src/imageKit/imagekit.module';
+import { LabItem, LabItemSchema } from '../lab-item/schemas/lab-item.schema';
+import { ImagekitModule } from '../imageKit/imagekit.module';
 
 @Module({
   imports: [
