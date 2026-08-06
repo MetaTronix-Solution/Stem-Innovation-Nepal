@@ -3,15 +3,14 @@ import { AdminController } from './admin.controller';
 import { AdminService } from './admin.service';
 import { MongooseModule } from '@nestjs/mongoose';
 import { Admin, AdminSchema } from './schemas/admin.schema';
-import { AdminSeed } from 'src/seed/admin.seed';
+import { AdminSeed } from '../seed/admin.seed';
 
 @Module({
-
-  imports:[
+  imports: [
     MongooseModule.forFeature([
       {
         name: Admin.name,
-        schema: AdminSchema
+        schema: AdminSchema,
       },
     ]),
   ],
