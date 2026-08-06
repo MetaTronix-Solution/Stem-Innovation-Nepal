@@ -2,12 +2,9 @@ import { Injectable, OnModuleInit } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
 import { Model } from "mongoose";
 import * as bcrypt from 'bcryptjs';
-import { Admin, AdminDocument } from "src/admin/schemas/admin.schema";
-
-
+import { Admin, AdminDocument } from "../admin/schemas/admin.schema";
 
 @Injectable()
-
 export class AdminSeed implements OnModuleInit {
     constructor(
         @InjectModel(Admin.name)
@@ -25,8 +22,7 @@ export class AdminSeed implements OnModuleInit {
             email: adminEmail,
         });
 
-
-        if(existingAdmin) {
+        if (existingAdmin) {
             console.log("Admin Already Exist");
             return;
         }
@@ -39,6 +35,6 @@ export class AdminSeed implements OnModuleInit {
             password: hashedPassword,
         });
 
-        console.log("Default Admin Created Successfu;;y");
+        console.log("Default Admin Created Successfully");
     }
 }
