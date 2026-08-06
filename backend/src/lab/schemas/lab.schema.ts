@@ -34,6 +34,11 @@ export type LabDocument = HydratedDocument<Lab>;
     price!: number;
 
     @Prop({
+    required: true,
+    })
+    imageFileId!: string;
+
+    @Prop({
         type: [
             {
                 type: mongoose.Schema.Types.ObjectId,

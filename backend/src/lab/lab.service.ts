@@ -5,6 +5,8 @@ import { LabItem, LabItemDocument } from 'src/lab-item/schemas/lab-item.schema';
 import { Lab, LabDocument } from './schemas/lab.schema';
 import { CreateLabDto } from './dto/create-lab.dto';
 import { UpdateLabDto } from './dto/update-lab.dto';
+import { ImagekitModule } from 'src/imageKit/imagekit.module';
+import { ImagekitService } from 'src/imageKit/imagekit.service';
 
 
 
@@ -18,6 +20,8 @@ export class LabService {
 
         @InjectModel(LabItem.name)
         private labItemModel: Model<LabItemDocument>,
+
+        private readonly imagekitService: ImagekitService,
     ) {}
 
 
@@ -27,11 +31,15 @@ export class LabService {
     async create(
         createLabDto: CreateLabDto, file: Express.Multer.File,
     ) {
-        const image = `/uploads/lab/${file.filename}`;
+        const uploadedImage = await this.imagekitService.uploadFile(
+        file,
+        "/lab",
+        );
 
         const lab = await this.labModel.create({
             ...createLabDto,
-            image,
+            image: uploadedImage.url,
+            imageFileId: uploadedImage.fileId,
         });
 
         return {
@@ -78,9 +86,24 @@ export class LabService {
     ) {
         const updateData: any = {...updateLabDto};
 
-        if(file) {
-            updateData.image = `/uploads/lab/${file.filename}`;
-        }
+        if (file) {
+
+    const existingLab = await this.labModel.findById(id);
+
+    if (existingLab?.imageFileId) {
+        await this.imagekitService.deleteFile(
+            existingLab.imageFileId,
+        );
+    }
+
+    const uploadedImage = await this.imagekitService.uploadFile(
+        file,
+        "/lab",
+    );
+
+    updateData.image = uploadedImage.url;
+    updateData.imageFileId = uploadedImage.fileId;
+}
 
         const lab = await this.labModel.findByIdAndUpdate(id, updateData, {new: true});
 
@@ -98,16 +121,24 @@ export class LabService {
     // Delete Lab
 
     async remove(id: string) {
-        const lab = await this.labModel.findByIdAndDelete(id);
+        const lab = await this.labModel.findById(id);
 
-        if(!lab) {
-            throw new NotFoundException("Lab Setup not found");
-        }
+if (!lab) {
+    throw new NotFoundException("Lab Setup not found");
+}
 
-        return {
-            success: true,
-            message: "Lab setup deleted successfully",
-        }
+if (lab.imageFileId) {
+    await this.imagekitService.deleteFile(
+        lab.imageFileId,
+    );
+}
+
+await lab.deleteOne();
+
+return {
+    success: true,
+    message: "Lab setup deleted successfully",
+};
     }
 
 
