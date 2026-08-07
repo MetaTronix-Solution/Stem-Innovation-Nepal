@@ -1,4 +1,4 @@
-import {
+﻿import {
   Controller,
   Get,
   Post,
@@ -13,28 +13,16 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { LabItemService } from './lab-item.service';
 import { CreateLabItemDto } from './dto/create-lab-item.dto';
 import { UpdateLabItemDto } from './dto/update-lab-item.dto';
-import { diskStorage } from 'multer';
-import { extname } from 'path';
-
+import { memoryStorage } from 'multer';
 
 @Controller('lab-item')
 export class LabItemController {
-    constructor(private readonly labItemService: LabItemService) {}
+  constructor(private readonly labItemService: LabItemService) {}
 
-
-    // Create Lab Item
-    @Post()
+  @Post()
   @UseInterceptors(
     FileInterceptor('image', {
-      storage: diskStorage({
-        destination: './uploads/lab-item',
-        filename: (req, file, cb) => {
-          const unique =
-            Date.now() + '-' + Math.round(Math.random() * 1e9);
-
-          cb(null, unique + extname(file.originalname));
-        },
-      }),
+      storage: memoryStorage(),
     }),
   )
   create(
@@ -44,37 +32,28 @@ export class LabItemController {
     return this.labItemService.create(createLabItemDto, file);
   }
 
+  @Get()
+  findAll() {
+    return this.labItemService.findAll();
+  }
 
+  @Get(':id')
+  findOne(@Param('id') id: string) {
+    return this.labItemService.findOne(id);
+  }
 
-    // Get All
-    @Get()
-    findAll() {
-        return this.labItemService.findAll();
-    }
+  @Put(':id')
+  @UseInterceptors(FileInterceptor('image', { storage: memoryStorage() }))
+  update(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File,
+    @Body() updateLabItemDto: UpdateLabItemDto,
+  ) {
+    return this.labItemService.update(id, updateLabItemDto, file);
+  }
 
-    //Get one
-    @Get(":id")
-    findOne(@Param("id") id: string) {
-        return this.labItemService.findOne(id);
-    }
-
-    // Update
-    @Put(":id")
-    @UseInterceptors(FileInterceptor("image"))
-    update(
-        @Param("id") id: string,
-        @UploadedFile() file: Express.Multer.File,
-        @Body() updateLabItemDto: UpdateLabItemDto,
-    ) {
-        return this.labItemService.update(id, updateLabItemDto, file);
-    }
-
-    // Update
-
-    @Delete(":id")
-    remove(@Param("id") id: string) {
-        return this.labItemService.remove(id);
-    }
-
-
+  @Delete(':id')
+  remove(@Param('id') id: string) {
+    return this.labItemService.remove(id);
+  }
 }
