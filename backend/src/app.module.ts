@@ -7,8 +7,6 @@ import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { ContactModule } from './contact/contact.module';
 import { BlogModule } from './blog/blog.module';
-import { LabModule } from './lab/lab.module';
-import { LabItemModule } from './lab-item/lab-item.module';
 import { ImagekitModule } from './imageKit/imagekit.module';
 
 @Module({
@@ -29,8 +27,6 @@ import { ImagekitModule } from './imageKit/imagekit.module';
     GalleryModule,
     ContactModule,
     BlogModule,
-    LabModule,
-    LabItemModule,
     ImagekitModule
   ],
 })
