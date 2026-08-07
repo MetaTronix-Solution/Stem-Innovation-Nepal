@@ -41,6 +41,8 @@ export class LabItem {
     required: true,
   })
   image!: string;
+  @Prop()
+  imageFileId?: string;
 
   @Prop({
     type: Types.ObjectId,
