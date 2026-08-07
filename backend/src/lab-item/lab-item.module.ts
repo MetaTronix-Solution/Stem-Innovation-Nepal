@@ -1,9 +1,9 @@
-import { Module } from '@nestjs/common';
+﻿import { Module } from '@nestjs/common';
 import { LabItemController } from './lab-item.controller';
 import { LabItemService } from './lab-item.service';
 import { LabItem, LabItemSchema } from './schemas/lab-item.schema';
 import { MongooseModule } from '@nestjs/mongoose';
-import { ImagekitModule } from 'src/imageKit/imagekit.module';
+import { ImagekitModule } from '../imageKit/imagekit.module';
 
 @Module({
   imports: [
