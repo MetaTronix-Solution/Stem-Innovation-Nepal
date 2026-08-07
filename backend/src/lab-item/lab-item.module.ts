@@ -3,6 +3,7 @@ import { LabItemController } from './lab-item.controller';
 import { LabItemService } from './lab-item.service';
 import { LabItem, LabItemSchema } from './schemas/lab-item.schema';
 import { MongooseModule } from '@nestjs/mongoose';
+import { ImagekitModule } from 'src/imageKit/imagekit.module';
 
 @Module({
   imports: [
@@ -11,7 +12,8 @@ import { MongooseModule } from '@nestjs/mongoose';
       name: LabItem.name,
       schema: LabItemSchema,
       }
-    ])
+    ]),
+    ImagekitModule
 
   ],
 
