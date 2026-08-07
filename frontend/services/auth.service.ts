@@ -1,12 +1,18 @@
 import api from "@/lib/axios";
 
 export async function loginAdmin(email: string, password: string) {
-  const { data } = await api.post("/auth/login", {
-    email,
-    password,
-  });
+  try {
+     const { data } = await api.post("/auth/login", {
+        email,
+        password,
+     })  ;
 
-  return data;
+       return data;
+
+  } catch (error) {
+    console.log(error);
+  }
+
 }
 
 export async function getAdmin() {
