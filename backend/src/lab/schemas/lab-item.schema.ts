@@ -1,75 +1,70 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument, Types } from 'mongoose';
+import {
+  Prop,
+  Schema,
+  SchemaFactory,
+} from '@nestjs/mongoose';
 
-export type LabItemDocument = HydratedDocument<LabItem>;
+import {
+  HydratedDocument,
+  Types,
+} from 'mongoose';
 
-export enum LabItemStatus {
-  AVAILABLE = 'AVAILABLE',
-  LOW_STOCK = 'LOW_STOCK',
-  OUT_OF_STOCK = 'OUT_OF_STOCK',
-  EXPIRED = 'EXPIRED',
-}
+export type LabItemDocument =
+  HydratedDocument<LabItem>;
 
-@Schema({ timestamps: true })
+@Schema({
+  timestamps: true,
+})
 export class LabItem {
   @Prop({
     required: true,
     trim: true,
   })
-  name!: string;
+  title!: string;
 
   @Prop({
     required: true,
-    unique: true,
     trim: true,
-    uppercase: true,
   })
-  itemCode!: string;
+  description!: string;
 
   @Prop({
+    required: true,
     trim: true,
   })
-  category?: string;
+  specification!: string;
 
   @Prop({
     required: true,
     min: 0,
-    default: 0,
-  })
-  quantity!: number;
-
-  @Prop({
-    trim: true,
-  })
-  unit?: string;
-
-  @Prop({
-    min: 0,
-    default: 0,
-  })
-  minimumStock!: number;
-
-  @Prop({
-    min: 0,
-    default: 0,
   })
   price!: number;
 
-  @Prop()
-  expiryDate?: Date;
-
   @Prop({
-    enum: LabItemStatus,
-    default: LabItemStatus.AVAILABLE,
+    default: 0,
+    min: 0,
   })
-  status!: LabItemStatus;
+  quantity!: number;
 
+  // ImageKit URL
   @Prop({
-    type: Types.ObjectId,
-    ref: 'Lab',
     required: true,
   })
-  lab!: Types.ObjectId;
+  image!: string;
+
+  // ImageKit file ID
+  @Prop({
+    required: true,
+  })
+  imageFileId!: string;
+
+  // @Prop({
+  //   type: Types.ObjectId,
+  //   ref: 'LabCategory',
+  //   required: true,
+  // })
+  // category!: Types.ObjectId;
 }
 
-export const LabItemSchema = SchemaFactory.createForClass(LabItem);
+export const LabItemSchema =
+  SchemaFactory.createForClass(LabItem);

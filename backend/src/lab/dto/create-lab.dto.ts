@@ -1,33 +1,33 @@
 import {
-  IsEmail,
-  IsEnum,
+  IsArray,
+  IsMongoId,
+  IsNotEmpty,
+  IsNumber,
   IsOptional,
   IsString,
+  Min,
 } from 'class-validator';
 
-import { LabStatus } from '../schemas/lab.schema';
+import { Type } from 'class-transformer';
 
 export class CreateLabDto {
   @IsString()
-  name!: string;
+  @IsNotEmpty()
+  title!: string;
 
-  @IsOptional()
   @IsString()
-  description?: string;
+  @IsNotEmpty()
+  description!: string;
+
+  @Type(() => Number)
+  @IsNumber()
+  @Min(0)
+  price!: number;
 
   @IsOptional()
-  @IsString()
-  location?: string;
-
-  @IsOptional()
-  @IsString()
-  contactNumber?: string;
-
-  @IsOptional()
-  @IsEmail()
-  email?: string;
-
-  @IsOptional()
-  @IsEnum(LabStatus)
-  status?: LabStatus;
+  @IsArray()
+  @IsMongoId({
+    each: true,
+  })
+  labItems?: string[];
 }

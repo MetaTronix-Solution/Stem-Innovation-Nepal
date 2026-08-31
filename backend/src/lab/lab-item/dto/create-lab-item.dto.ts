@@ -1,53 +1,38 @@
 import {
-  IsDateString,
-  IsEnum,
   IsMongoId,
+  IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
   Min,
 } from 'class-validator';
-import { LabItemStatus } from 'src/lab/schemas/lab-item.schema';
 
-
+import { Type } from 'class-transformer';
 
 export class CreateLabItemDto {
   @IsString()
-  name!: string;
+  @IsNotEmpty()
+  title!: string;
 
   @IsString()
-  itemCode!: string;
+  @IsNotEmpty()
+  description!: string;
 
-  @IsOptional()
   @IsString()
-  category?: string;
+  @IsNotEmpty()
+  specification!: string;
 
+  @Type(() => Number)
   @IsNumber()
   @Min(0)
-  quantity!: number;
+  price!: number;
 
-  @IsOptional()
-  @IsString()
-  unit?: string;
-
-  @IsOptional()
+  @Type(() => Number)
   @IsNumber()
   @Min(0)
-  minimumStock?: number;
-
   @IsOptional()
-  @IsNumber()
-  @Min(0)
-  price?: number;
-
-  @IsOptional()
-  @IsDateString()
-  expiryDate?: string;
-
-  @IsOptional()
-  @IsEnum(LabItemStatus)
-  status?: LabItemStatus;
+  quantity?: number;
 
   @IsMongoId()
-  lab!: string;
+  category!: string;
 }
