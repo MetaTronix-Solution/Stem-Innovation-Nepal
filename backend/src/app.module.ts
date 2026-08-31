@@ -8,6 +8,7 @@ import { GalleryModule } from './gallery/gallery.module';
 import { ContactModule } from './contact/contact.module';
 import { BlogModule } from './blog/blog.module';
 import { ImagekitModule } from './imageKit/imagekit.module';
+import { LabModule } from './lab/lab.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { ImagekitModule } from './imageKit/imagekit.module';
     GalleryModule,
     ContactModule,
     BlogModule,
-    ImagekitModule
+    ImagekitModule,
+    LabModule
   ],
 })
 export class AppModule {}
