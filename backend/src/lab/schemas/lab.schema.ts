@@ -1,47 +1,61 @@
-import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { HydratedDocument } from 'mongoose';
+import {
+  Prop,
+  Schema,
+  SchemaFactory,
+} from '@nestjs/mongoose';
 
-export type LabDocument = HydratedDocument<Lab>;
+import mongoose, {
+  HydratedDocument,
+} from 'mongoose';
 
-export enum LabStatus {
-  ACTIVE = 'ACTIVE',
-  INACTIVE = 'INACTIVE',
-}
+export type LabDocument =
+  HydratedDocument<Lab>;
 
-@Schema({ timestamps: true })
+@Schema({
+  timestamps: true,
+})
 export class Lab {
   @Prop({
     required: true,
     trim: true,
   })
-  name!: string;
+  title!: string;
 
   @Prop({
+    required: true,
     trim: true,
   })
-  description?: string;
+  description!: string;
+
+  // ImageKit URL
+  @Prop({
+    required: true,
+  })
+  image!: string;
+
+  // ImageKit file ID
+  @Prop({
+    required: true,
+  })
+  imageFileId!: string;
 
   @Prop({
-    trim: true,
+    required: true,
+    min: 0,
   })
-  location?: string;
+  price!: number;
 
   @Prop({
-    trim: true,
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'LabItem',
+      },
+    ],
+    default: [],
   })
-  contactNumber?: string;
-
-  @Prop({
-    trim: true,
-    lowercase: true,
-  })
-  email?: string;
-
-  @Prop({
-    enum: LabStatus,
-    default: LabStatus.ACTIVE,
-  })
-  status!: LabStatus;
+  labItems!: mongoose.Types.ObjectId[];
 }
 
-export const LabSchema = SchemaFactory.createForClass(Lab);
+export const LabSchema =
+  SchemaFactory.createForClass(Lab);
