@@ -5,12 +5,9 @@ import {
 } from '@nestjs/common';
 
 import { InjectModel } from '@nestjs/mongoose';
-
 import mongoose, {
   Model,
 } from 'mongoose';
-
-
 
 import { CreateLabItemDto } from './dto/create-lab-item.dto';
 import { UpdateLabItemDto } from './dto/update-lab-item.dto';
@@ -29,10 +26,10 @@ export class LabItemService {
       ImagekitService,
   ) {}
 
-  // =========================
-  // CREATE
-  // =========================
 
+
+
+  // CREATE
   async create(
     createLabItemDto: CreateLabItemDto,
     file: Express.Multer.File,
@@ -87,9 +84,9 @@ export class LabItemService {
     };
   }
 
-  // =========================
+
+
   // GET ALL
-  // =========================
 
   async findAll() {
     const items =
@@ -107,10 +104,10 @@ export class LabItemService {
     };
   }
 
-  // =========================
-  // GET ONE
-  // =========================
 
+
+
+  // GET ONE
   async findOne(id: string) {
     if (
       !mongoose.Types.ObjectId.isValid(id)
@@ -137,10 +134,8 @@ export class LabItemService {
     };
   }
 
-  // =========================
-  // UPDATE
-  // =========================
 
+  // UPDATE
   async update(
     id: string,
     updateLabItemDto: UpdateLabItemDto,
@@ -218,9 +213,8 @@ export class LabItemService {
     };
   }
 
-  // =========================
+
   // DELETE
-  // =========================
 
   async remove(id: string) {
     if (
@@ -266,10 +260,8 @@ export class LabItemService {
     };
   }
 
-  // =========================
-  // GET BY CATEGORY
-  // =========================
 
+  // GET BY CATEGORY
   async findByCategory(
     categoryId: string,
   ) {

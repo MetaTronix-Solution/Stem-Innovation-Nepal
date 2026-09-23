@@ -11,13 +11,12 @@ import {
 } from '@nestjs/common';
 
 import { FileInterceptor } from '@nestjs/platform-express';
-
 import { memoryStorage } from 'multer';
-
 import { LabItemService } from './lab-item.service';
-
 import { CreateLabItemDto } from './dto/create-lab-item.dto';
 import { UpdateLabItemDto } from './dto/update-lab-item.dto';
+
+
 
 @Controller('lab-item')
 export class LabItemController {
@@ -25,9 +24,8 @@ export class LabItemController {
     private readonly labItemService: LabItemService,
   ) {}
 
-  // =========================
+
   // CREATE LAB ITEM
-  // =========================
 
   @Post()
   @UseInterceptors(
@@ -48,18 +46,18 @@ export class LabItemController {
     );
   }
 
-  // =========================
+
   // GET ALL
-  // =========================
+
 
   @Get()
   findAll() {
     return this.labItemService.findAll();
   }
 
-  // =========================
+
   // GET BY CATEGORY
-  // =========================
+
 
   @Get('category/:categoryId')
   findByCategory(
@@ -71,9 +69,8 @@ export class LabItemController {
     );
   }
 
-  // =========================
   // GET ONE
-  // =========================
+
 
   @Get(':id')
   findOne(
@@ -82,9 +79,9 @@ export class LabItemController {
     return this.labItemService.findOne(id);
   }
 
-  // =========================
+
+
   // UPDATE
-  // =========================
 
   @Put(':id')
   @UseInterceptors(
@@ -108,9 +105,8 @@ export class LabItemController {
     );
   }
 
-  // =========================
+
   // DELETE
-  // =========================
 
   @Delete(':id')
   remove(
