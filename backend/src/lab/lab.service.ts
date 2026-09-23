@@ -15,8 +15,6 @@ import {
   LabDocument,
 } from './schemas/lab.schema';
 
-
-
 import { CreateLabDto } from './dto/create-lab.dto';
 import { UpdateLabDto } from './dto/update-lab.dto';
 import { LabItem } from './schemas/lab-item.schema';
@@ -39,10 +37,8 @@ export class LabService {
       ImagekitService,
   ) {}
 
-  // =========================
-  // CREATE LAB
-  // =========================
 
+  // CREATE LAB
   async create(
     createLabDto: CreateLabDto,
     file: Express.Multer.File,
@@ -112,10 +108,7 @@ export class LabService {
     };
   }
 
-  // =========================
   // GET ALL LABS
-  // =========================
-
   async findAll() {
     const labs =
       await this.labModel
@@ -132,9 +125,8 @@ export class LabService {
     };
   }
 
-  // =========================
+
   // GET SINGLE LAB
-  // =========================
 
   async findOne(id: string) {
     if (
@@ -162,9 +154,8 @@ export class LabService {
     };
   }
 
-  // =========================
+
   // UPDATE LAB
-  // =========================
 
   async update(
     id: string,
@@ -265,10 +256,8 @@ export class LabService {
     };
   }
 
-  // =========================
-  // DELETE LAB
-  // =========================
 
+  // DELETE LAB
   async remove(id: string) {
     if (
       !mongoose.Types.ObjectId.isValid(id)

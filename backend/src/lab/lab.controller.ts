@@ -9,14 +9,14 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-
 import { FileInterceptor } from '@nestjs/platform-express';
 import { memoryStorage } from 'multer';
-
 import { LabService } from './lab.service';
-
 import { CreateLabDto } from './dto/create-lab.dto';
 import { UpdateLabDto } from './dto/update-lab.dto';
+
+
+
 
 @Controller('lab')
 export class LabController {
@@ -24,10 +24,9 @@ export class LabController {
     private readonly labService: LabService,
   ) {}
 
-  // =========================
-  // CREATE LAB
-  // =========================
 
+
+  // CREATE LAB
   @Post()
   @UseInterceptors(
     FileInterceptor('image', {
@@ -46,19 +45,14 @@ export class LabController {
     );
   }
 
-  // =========================
   // GET ALL LABS
-  // =========================
-
   @Get()
   findAll() {
     return this.labService.findAll();
   }
 
-  // =========================
-  // GET SINGLE LAB
-  // =========================
 
+  // GET SINGLE LAB
   @Get(':id')
   findOne(
     @Param('id') id: string,
@@ -66,10 +60,8 @@ export class LabController {
     return this.labService.findOne(id);
   }
 
-  // =========================
-  // UPDATE LAB
-  // =========================
 
+  // UPDATE LAB
   @Put(':id')
   @UseInterceptors(
     FileInterceptor('image', {
@@ -92,10 +84,8 @@ export class LabController {
     );
   }
 
-  // =========================
-  // DELETE LAB
-  // =========================
 
+  // DELETE LAB
   @Delete(':id')
   remove(
     @Param('id') id: string,
