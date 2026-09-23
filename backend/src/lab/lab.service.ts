@@ -18,7 +18,7 @@ import {
 import { CreateLabDto } from './dto/create-lab.dto';
 import { UpdateLabDto } from './dto/update-lab.dto';
 import { LabItem } from './schemas/lab-item.schema';
-import { ImagekitService } from 'src/imageKit/imagekit.service';
+import { ImagekitService } from '../imageKit/imagekit.service';
 
 
 
