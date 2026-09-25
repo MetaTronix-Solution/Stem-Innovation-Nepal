@@ -69,6 +69,36 @@ export class LabCategoryService {
                 throw new NotFoundException("Lab category with this name is already exists");
             }
         }
+
+        const updateCategory = await this.labCategoryModel.findByIdAndUpdate(
+            id,
+            updateLabCategoryDto,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        return {
+            message: "Lab Category updated successfully",
+            category: updateCategory
+        }
+
+    }
+
+    //Delete Category
+    async remove(id: string) {
+        const category = await this.labCategoryModel.findById(id);
+
+        if(!category) {
+            throw new NotFoundException("Lab category not found")
+        }
+
+        await this.labCategoryModel.findByIdAndDelete(id);
+
+        return {
+            message: "Lab category deleted successfully"
+        }
     }
 
 }
