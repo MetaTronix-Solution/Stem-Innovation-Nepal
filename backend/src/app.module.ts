@@ -10,6 +10,7 @@ import { BlogModule } from './blog/blog.module';
 import { ImagekitModule } from './imageKit/imagekit.module';
 
 import { LabCategoryModule } from './lab-category/lab-category.module';
+import { LabItemModule } from './lab-item/lab-item.module';
 
 @Module({
   imports: [
@@ -30,7 +31,8 @@ import { LabCategoryModule } from './lab-category/lab-category.module';
     ContactModule,
     BlogModule,
     ImagekitModule,
-    LabCategoryModule
+    LabCategoryModule,
+    LabItemModule
   ],
 })
 export class AppModule {}
