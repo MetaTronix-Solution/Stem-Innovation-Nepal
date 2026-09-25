@@ -11,6 +11,7 @@ import { ImagekitModule } from './imageKit/imagekit.module';
 
 import { LabCategoryModule } from './lab-category/lab-category.module';
 import { LabItemModule } from './lab-item/lab-item.module';
+import { LabModule } from './lab/lab.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { LabItemModule } from './lab-item/lab-item.module';
     BlogModule,
     ImagekitModule,
     LabCategoryModule,
-    LabItemModule
+    LabItemModule,
+    LabModule
   ],
 })
 export class AppModule {}
