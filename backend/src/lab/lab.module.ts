@@ -13,6 +13,7 @@ import {
   LabItem,
   LabItemSchema,
 } from '../lab-item/schemas/lab-item.schema';
+import { ImagekitModule } from 'src/imageKit/imagekit.module';
 
 @Module({
   imports: [
@@ -26,6 +27,7 @@ import {
         schema: LabItemSchema,
       },
     ]),
+    ImagekitModule
   ],
 
   controllers: [LabController],

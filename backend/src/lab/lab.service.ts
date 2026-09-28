@@ -18,6 +18,7 @@ import {
 
 import { CreateLabDto } from './dto/create-lab.dto';
 import { UpdateLabDto } from './dto/update-lab.dto';
+import { ImagekitService } from 'src/imageKit/imagekit.service';
 
 @Injectable()
 export class LabService {
@@ -27,10 +28,12 @@ export class LabService {
 
     @InjectModel(LabItem.name)
     private readonly labItemModel: Model<LabItemDocument>,
+
+    private readonly imagekitService: ImagekitService,
   ) {}
 
   // CREATE LAB
-  async create(createLabDto: CreateLabDto) {
+  async create(createLabDto: CreateLabDto, file?: Express.Multer.File) {
     const { labItems = [] } = createLabDto;
 
     // Check whether all Lab Items exist
@@ -47,9 +50,18 @@ export class LabService {
       }
     }
 
-    const lab = await this.labModel.create(
-      createLabDto,
-    );
+    let image: string | undefined;
+
+    if(file) {
+      const uploadedImage = await this.imagekitService.uploadFile(file, "upload/labs");
+
+      image = uploadedImage.url;
+    }
+
+    const lab = await this.labModel.create({
+      ...createLabDto,
+      image
+  });
 
     return {
       message: 'Lab created successfully',
@@ -98,6 +110,7 @@ export class LabService {
   async update(
     id: string,
     updateLabDto: UpdateLabDto,
+    file?: Express.Multer.File,
   ) {
     const lab =
       await this.labModel.findById(id);
@@ -127,6 +140,16 @@ export class LabService {
           );
         }
       }
+    }
+
+    const updateData: any = {
+      ...updateLabDto,
+    };
+
+    if(file) {
+      const uploadedImage = await this.imagekitService.uploadFile(file, "uploads/labs");
+
+      updateData.image = uploadedImage.url;
     }
 
     const updatedLab =
