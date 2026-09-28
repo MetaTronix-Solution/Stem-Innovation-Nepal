@@ -33,41 +33,71 @@ export class LabService {
   ) {}
 
   // CREATE LAB
-  async create(createLabDto: CreateLabDto, file?: Express.Multer.File) {
-    const { labItems = [] } = createLabDto;
 
-    // Check whether all Lab Items exist
-    if (labItems.length > 0) {
-      const existingLabItems =
-        await this.labItemModel.find({
-          _id: { $in: labItems },
-        });
+async create(
+  createLabDto: CreateLabDto,
+  file?: Express.Multer.File,
+) {
+  // Convert labItems into an array
+  let labItems: string[] = [];
 
-      if (existingLabItems.length !== labItems.length) {
-        throw new NotFoundException(
-          'One or more lab items not found',
-        );
-      }
+  if (createLabDto.labItems) {
+    if (Array.isArray(createLabDto.labItems)) {
+      labItems = createLabDto.labItems;
+    } else {
+      labItems = [createLabDto.labItems];
     }
+  }
 
-    let image: string | undefined;
+  // Check whether all Lab Items exist
+  if (labItems.length > 0) {
+    const existingLabItems =
+      await this.labItemModel.find({
+        _id: { $in: labItems },
+      });
 
-    if(file) {
-      const uploadedImage = await this.imagekitService.uploadFile(file, "upload/labs");
+    console.log(
+      'Found Lab Items:',
+      existingLabItems.length,
+    );
 
-      image = uploadedImage.url;
+    if (existingLabItems.length !== labItems.length) {
+      throw new NotFoundException(
+        'One or more lab items not found',
+      );
     }
+  }
 
-    const lab = await this.labModel.create({
-      ...createLabDto,
-      image
+  // Upload image to ImageKit
+  let image: string | undefined;
+
+  if (file) {
+    const uploadedImage =
+      await this.imagekitService.uploadFile(
+        file,
+        'uploads/labs',
+      );
+
+    image = uploadedImage.url;
+  }
+
+  // Create Lab
+  const lab = await this.labModel.create({
+    title: createLabDto.title,
+    description: createLabDto.description,
+    price: createLabDto.price,
+    labItems,
+    image,
   });
 
-    return {
-      message: 'Lab created successfully',
-      lab,
-    };
-  }
+  return {
+    message: 'Lab created successfully',
+    lab,
+  };
+}
+
+
+
 
   // GET ALL LABS
   async findAll() {
@@ -106,73 +136,89 @@ export class LabService {
     };
   }
 
-  // UPDATE LAB
-  async update(
-    id: string,
-    updateLabDto: UpdateLabDto,
-    file?: Express.Multer.File,
-  ) {
-    const lab =
-      await this.labModel.findById(id);
+ // UPDATE LAB
+async update(
+  id: string,
+  updateLabDto: UpdateLabDto,
+  file?: Express.Multer.File,
+) {
+  const lab =
+    await this.labModel.findById(id);
 
-    if (!lab) {
-      throw new NotFoundException(
-        'Lab not found',
-      );
-    }
-
-    // Check Lab Items when updating
-    if (updateLabDto.labItems) {
-      const labItems = updateLabDto.labItems;
-
-      if (labItems.length > 0) {
-        const existingLabItems =
-          await this.labItemModel.find({
-            _id: { $in: labItems },
-          });
-
-        if (
-          existingLabItems.length !==
-          labItems.length
-        ) {
-          throw new NotFoundException(
-            'One or more lab items not found',
-          );
-        }
-      }
-    }
-
-    const updateData: any = {
-      ...updateLabDto,
-    };
-
-    if(file) {
-      const uploadedImage = await this.imagekitService.uploadFile(file, "uploads/labs");
-
-      updateData.image = uploadedImage.url;
-    }
-
-    const updatedLab =
-      await this.labModel
-        .findByIdAndUpdate(
-          id,
-          updateLabDto,
-          {
-            new: true,
-            runValidators: true,
-          },
-        )
-        .populate(
-          'labItems',
-          'title description specification price quantity image category',
-        );
-
-    return {
-      message: 'Lab updated successfully',
-      lab: updatedLab,
-    };
+  if (!lab) {
+    throw new NotFoundException(
+      'Lab not found',
+    );
   }
 
+  // Convert labItems into an array
+  let labItems: string[] | undefined;
+
+  if (updateLabDto.labItems) {
+    if (Array.isArray(updateLabDto.labItems)) {
+      labItems = updateLabDto.labItems;
+    } else {
+      labItems = [updateLabDto.labItems];
+    }
+
+    // Check whether all Lab Items exist
+    if (labItems.length > 0) {
+      const existingLabItems =
+        await this.labItemModel.find({
+          _id: { $in: labItems },
+        });
+
+      if (
+        existingLabItems.length !==
+        labItems.length
+      ) {
+        throw new NotFoundException(
+          'One or more lab items not found',
+        );
+      }
+    }
+  }
+
+  const updateData: any = {
+    ...updateLabDto,
+  };
+
+  // Use converted array
+  if (labItems !== undefined) {
+    updateData.labItems = labItems;
+  }
+
+  // Upload new image if provided
+  if (file) {
+    const uploadedImage =
+      await this.imagekitService.uploadFile(
+        file,
+        'uploads/labs',
+      );
+
+    updateData.image = uploadedImage.url;
+  }
+
+  const updatedLab =
+    await this.labModel
+      .findByIdAndUpdate(
+        id,
+        updateData,
+        {
+          new: true,
+          runValidators: true,
+        },
+      )
+      .populate(
+        'labItems',
+        'title description specification price quantity image category',
+      );
+
+  return {
+    message: 'Lab updated successfully',
+    lab: updatedLab,
+  };
+}
   // DELETE LAB
   async remove(id: string) {
     const lab =
