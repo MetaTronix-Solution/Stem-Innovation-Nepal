@@ -6,12 +6,15 @@ import {
   Param,
   Patch,
   Post,
+  UploadedFile,
+  UseInterceptors,
 } from '@nestjs/common';
 
 import { LabItemService } from './lab-item.service';
 
 import { CreateLabItemDto } from './dto/create-lab-item.dto';
 import { UpdateLabItemDto } from './dto/update-lab-item.dto';
+import { FileInterceptor } from '@nestjs/platform-express';
 
 @Controller('lab-item')
 export class LabItemController {
@@ -20,11 +23,14 @@ export class LabItemController {
   ) {}
 
   @Post()
+  @UseInterceptors(FileInterceptor("image"))
   create(
     @Body() createLabItemDto: CreateLabItemDto,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
     return this.labItemService.create(
       createLabItemDto,
+      file,
     );
   }
 
