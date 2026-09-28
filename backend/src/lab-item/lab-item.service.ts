@@ -5,6 +5,7 @@ import { Model } from 'mongoose';
 import { LabCategory, LabCategoryDocument } from 'src/lab-category/schemas/lab-category.schema';
 import { CreateLabItemDto } from './dto/create-lab-item.dto';
 import { UpdateLabItemDto } from './dto/update-lab-item.dto';
+import { ImagekitService } from 'src/imageKit/imagekit.service';
 
 @Injectable()
 export class LabItemService {
@@ -13,20 +14,30 @@ export class LabItemService {
         private readonly labItemModel: Model<LabItemDocument>,
 
         @InjectModel(LabCategory.name)
-        private readonly labCategoryModel: Model<LabCategoryDocument>
+        private readonly labCategoryModel: Model<LabCategoryDocument>,
+
+        private readonly imagekitService: ImagekitService,
     ) {}
 
 
 
     //Create
-    async create(createLabItemDto: CreateLabItemDto) {
+    async create(createLabItemDto: CreateLabItemDto, file?: Express.Multer.File) {
         const category = await this.labCategoryModel.findById(createLabItemDto.category);
 
         if(!category) {
             throw new NotFoundException("Lab category no found");
         }
 
-        const labItem = await this.labItemModel.create(createLabItemDto);
+        let image: string | undefined;
+
+        if(file) {
+            const uploadedImage = await this.imagekitService.uploadFile(file, "upload/lab-items");
+            image = uploadedImage.url;
+        }
+
+
+        const labItem = await this.labItemModel.create({...createLabItemDto, image});
 
         return {
             message: "Lab item created successfully",
