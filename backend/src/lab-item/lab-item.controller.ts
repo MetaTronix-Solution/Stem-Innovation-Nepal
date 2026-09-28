@@ -22,6 +22,8 @@ export class LabItemController {
     private readonly labItemService: LabItemService,
   ) {}
 
+
+
   @Post()
   @UseInterceptors(FileInterceptor("image"))
   create(
@@ -34,26 +36,41 @@ export class LabItemController {
     );
   }
 
+
+
+
   @Get()
   findAll() {
     return this.labItemService.findAll();
   }
+
+
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.labItemService.findOne(id);
   }
 
+
+
+
   @Patch(':id')
+  @UseInterceptors(FileInterceptor("image"))
   update(
     @Param('id') id: string,
     @Body() updateLabItemDto: UpdateLabItemDto,
+    @UploadedFile() file?: Express.Multer.File,
+
   ) {
     return this.labItemService.update(
       id,
       updateLabItemDto,
+      file,
     );
   }
+
+
 
   @Delete(':id')
   remove(@Param('id') id: string) {

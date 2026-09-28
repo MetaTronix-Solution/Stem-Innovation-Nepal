@@ -36,7 +36,6 @@ export class LabItemService {
             image = uploadedImage.url;
         }
 
-
         const labItem = await this.labItemModel.create({...createLabItemDto, image});
 
         return {
@@ -75,7 +74,7 @@ export class LabItemService {
     }
 
     //Update
-    async update(id: string, updateLabItemDto: UpdateLabItemDto) {
+    async update(id: string, updateLabItemDto: UpdateLabItemDto, file?: Express.Multer.File) {
         const labItem = await this.labItemModel.findById(id);
 
         if(!labItem) {
