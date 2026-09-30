@@ -246,12 +246,9 @@ export default function EditLabPage() {
         price,
       );
 
-      formData.append(
-        "labItems",
-        JSON.stringify(
-          selectedItems,
-        ),
-      );
+      selectedItems.forEach((itemId) => {
+      formData.append("labItems", itemId);
+      });
 
 
       if (image) {
