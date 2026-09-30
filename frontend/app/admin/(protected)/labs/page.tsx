@@ -11,7 +11,7 @@ import {
 import { Lab } from "@/types/lab";
 
 
-export default function LabsPage() {
+export default function Labs() {
 
   const [labs, setLabs] =
     useState<Lab[]>([]);

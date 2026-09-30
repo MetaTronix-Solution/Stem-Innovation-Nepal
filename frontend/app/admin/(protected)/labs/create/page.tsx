@@ -189,13 +189,9 @@ export default function CreateLabPage() {
        * Your backend should convert
        * this value into an array.
        */
-      formData.append(
-        "labItems",
-        JSON.stringify(
-          selectedItems,
-        ),
-      );
-
+      selectedItems.forEach((itemId) => {
+  formData.append("labItems", itemId);
+});
 
       if (image) {
 

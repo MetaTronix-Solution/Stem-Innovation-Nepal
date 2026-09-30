@@ -25,12 +25,36 @@ import { AxiosError } from "axios";
 import api from "@/lib/axios";
 
 const navItems = [
-  { title: "Analytics", url: "/admin/analytics", icon: BarChart3 },
-  { title: "Blog", url: "/admin/blog", icon: Newspaper },
-  { title: "Gallery", url: "/admin/gallery", icon: ImageIcon },
-  { title: "Lab ", url: "/admin/lab", icon: FlaskConical },
-  { title: "Lab Items", url: "/admin/lab-setup", icon: FlaskConical },
-
+  {
+    title: "Analytics",
+    url: "/admin/analytics",
+    icon: BarChart3,
+  },
+  {
+    title: "Blog",
+    url: "/admin/blog",
+    icon: Newspaper,
+  },
+  {
+    title: "Gallery",
+    url: "/admin/gallery",
+    icon: ImageIcon,
+  },
+  {
+    title: "Labs",
+    url: "/admin/labs",
+    icon: FlaskConical,
+  },
+  {
+    title: "Lab Items",
+    url: "/admin/lab-items",
+    icon: FlaskConical,
+  },
+  {
+    title: "Lab Category",
+    url: "/admin/lab-category",
+    icon: FlaskConical,
+  },
 ];
 
 export function AppSidebar() {
