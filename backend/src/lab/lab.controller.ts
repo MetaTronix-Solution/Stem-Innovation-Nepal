@@ -7,6 +7,7 @@ import {
   Patch,
   Post,
   UploadedFile,
+  UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
 
@@ -15,6 +16,8 @@ import { LabService } from './lab.service';
 import { CreateLabDto } from './dto/create-lab.dto';
 import { UpdateLabDto } from './dto/update-lab.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
+
 
 @Controller('lab')
 export class LabController {
