@@ -1,44 +1,38 @@
-import { LabCategory } from "./lab-category";
+import { LabItem } from "./lab-item";
 
-export interface LabItem {
+export interface Lab {
   _id: string;
   title: string;
   description: string;
-  specification: string;
-  price: number;
-  quantity: number;
   image?: string;
-  category: string | LabCategory;
+  price: number;
+  labItems: string[] | LabItem[];
   createdAt?: string;
   updatedAt?: string;
 }
 
-export interface CreateLabItemData {
+export interface CreateLabData {
   title: string;
   description: string;
-  specification: string;
   price: number;
-  quantity: number;
-  category: string;
+  labItems: string[];
   image?: File;
 }
 
-export interface UpdateLabItemData {
+export interface UpdateLabData {
   title?: string;
   description?: string;
-  specification?: string;
   price?: number;
-  quantity?: number;
-  category?: string;
+  labItems?: string[];
   image?: File;
 }
 
-export interface LabItemResponse {
+export interface LabResponse {
   message: string;
-  labItem: LabItem;
+  lab: Lab;
 }
 
-export interface LabItemsResponse {
+export interface LabsResponse {
   message: string;
-  labItems: LabItem[];
+  labs: Lab[];
 }

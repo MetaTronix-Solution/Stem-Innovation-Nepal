@@ -1,14 +1,14 @@
 import axios from "@/lib/axios";
 
 import {
-
+  LabResponse,
+  LabsResponse,
 } from "@/types/lab";
-import { LabItemResponse, LabItemsResponse } from "@/types/lab-item";
 
 
 // GET ALL
 export const getLabs =
-  async (): Promise<LabItemsResponse> => {
+  async (): Promise<LabsResponse> => {
     const response = await axios.get(
       "/lab",
     );
@@ -21,7 +21,7 @@ export const getLabs =
 export const getLab =
   async (
     id: string,
-  ): Promise<LabItemResponse> => {
+  ): Promise<LabResponse> => {
     const response = await axios.get(
       `/lab/${id}`,
     );
@@ -34,7 +34,7 @@ export const getLab =
 export const createLab =
   async (
     formData: FormData,
-  ): Promise<LabItemResponse> => {
+  ): Promise<LabResponse> => {
     const response = await axios.post(
       "/lab",
       formData,
@@ -49,7 +49,7 @@ export const updateLab =
   async (
     id: string,
     formData: FormData,
-  ): Promise<LabItemResponse> => {
+  ): Promise<LabResponse> => {
     const response = await axios.patch(
       `/lab/${id}`,
       formData,
