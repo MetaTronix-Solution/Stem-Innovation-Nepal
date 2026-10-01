@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ImagekitService } from '../imageKit/imagekit.service';
+import { ImagekitService } from './imagekit.service';
 
 @Module({
   imports: [ConfigModule],

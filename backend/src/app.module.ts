@@ -7,7 +7,7 @@ import { AuthModule } from './auth/auth.module';
 import { GalleryModule } from './gallery/gallery.module';
 import { ContactModule } from './contact/contact.module';
 import { BlogModule } from './blog/blog.module';
-import { ImagekitModule } from './imageKit/imagekit.module';
+import { ImagekitModule } from './imagekit-service/imagekit.module';
 
 import { LabCategoryModule } from './lab-category/lab-category.module';
 import { LabItemModule } from './lab-item/lab-item.module';
