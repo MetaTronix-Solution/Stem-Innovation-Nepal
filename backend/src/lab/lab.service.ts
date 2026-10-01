@@ -18,7 +18,7 @@ import {
 
 import { CreateLabDto } from './dto/create-lab.dto';
 import { UpdateLabDto } from './dto/update-lab.dto';
-import { ImagekitService } from 'src/imageKit/imagekit.service';
+import { ImagekitService } from 'src/imagekit-service/imagekit.service';
 
 @Injectable()
 export class LabService {

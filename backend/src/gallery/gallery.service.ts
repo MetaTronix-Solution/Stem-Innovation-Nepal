@@ -7,7 +7,7 @@ import { Model } from 'mongoose';
 
 import { Gallery, GalleryDocument } from './schemas/gallery.schema';
 import { CreateGalleryDto } from './dto/create-gallery.dto';
-import { ImagekitService } from '../imageKit/imagekit.service';
+import { ImagekitService } from '../imagekit-service/imagekit.service';
 
 @Injectable()
 export class GalleryService {
