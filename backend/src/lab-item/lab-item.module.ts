@@ -13,7 +13,7 @@ import {
   LabCategory,
   LabCategorySchema,
 } from '../lab-category/schemas/lab-category.schema';
-import { ImagekitModule } from 'src/imagekit-service/imagekit.module';
+import { ImagekitModule } from '../imagekit-service/imagekit.module';
 
 @Module({
   imports: [

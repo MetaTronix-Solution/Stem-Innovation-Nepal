@@ -2,10 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { LabItem, LabItemDocument } from './schemas/lab-item.schema';
 import { Model } from 'mongoose';
-import { LabCategory, LabCategoryDocument } from 'src/lab-category/schemas/lab-category.schema';
+import { LabCategory, LabCategoryDocument } from '../lab-category/schemas/lab-category.schema';
 import { CreateLabItemDto } from './dto/create-lab-item.dto';
 import { UpdateLabItemDto } from './dto/update-lab-item.dto';
-import { ImagekitService } from 'src/imagekit-service/imagekit.service';
+import { ImagekitService } from '../imagekit-service/imagekit.service';
 
 @Injectable()
 export class LabItemService {

@@ -1,7 +1,6 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { HydratedDocument, Types } from "mongoose";
-import { LabCategory } from "src/lab-category/schemas/lab-category.schema";
-
+import { LabCategory } from "../../lab-category/schemas/lab-category.schema";
 
 export type LabItemDocument = HydratedDocument<LabItem>;
 

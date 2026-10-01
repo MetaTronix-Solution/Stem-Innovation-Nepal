@@ -13,7 +13,7 @@ import {
   LabItem,
   LabItemSchema,
 } from '../lab-item/schemas/lab-item.schema';
-import { ImagekitModule } from 'src/imagekit-service/imagekit.module';
+import { ImagekitModule } from '../imagekit-service/imagekit.module';
 
 @Module({
   imports: [
