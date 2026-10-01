@@ -14,7 +14,8 @@ async function bootstrap() {
 
   app.enableCors({
   origin: [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "https://stem-innovation-nepal-mnav.vercel.app"
 
   ],
   credentials: true,
