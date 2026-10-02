@@ -97,7 +97,7 @@ export default function Contact() {
                   </h4>
 
                   <p className="text-slate">
-                    +977 XX-XXXXXXX
+                    +977 9812020752
                   </p>
                 </div>
               </div>
@@ -113,7 +113,7 @@ export default function Contact() {
                   </h4>
 
                   <p className="text-slate">
-                    info@steminnovationnepal.com
+                    siddharthayadav98@gmail.com
                   </p>
                 </div>
               </div>
