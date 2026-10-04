@@ -10,6 +10,7 @@ import { LabItem } from "@/types/lab-item";
 
 const LOW_STOCK_THRESHOLD = 5;
 
+const ADMIN_WHATSAPP_NUMBER = "9779812020752";
 export default function LabDetailsPage() {
   const params = useParams();
   const id = params.id as string;
@@ -55,6 +56,52 @@ export default function LabDetailsPage() {
     () => labItems.reduce((sum, item) => sum + Number(item.price || 0), 0),
     [labItems],
   );
+
+  const handleAddToCart = () => {
+  if (!lab) return;
+
+  const orderReference = `STEM-${Date.now()
+    .toString()
+    .slice(-6)}`;
+
+  const includedItems =
+    labItems.length > 0
+      ? labItems
+          .map(
+            (item, index) =>
+              `${index + 1}. ${item.title}\n   Price: Rs. ${Number(
+                item.price || 0
+              ).toLocaleString()}`
+          )
+          .join("\n")
+      : "No individual items listed";
+
+  const message = `Hello Stem Innovation Nepal,
+
+I am interested in ordering a lab setup.
+
+Order Reference: ${orderReference}
+
+LAB DETAILS
+--------------------
+Lab: ${lab.title}
+Price: Rs. ${Number(lab.price || 0).toLocaleString()}
+
+INCLUDED ITEMS
+--------------------
+${includedItems}
+
+Please provide me with the availability, delivery details, and next steps for placing the order.
+
+Thank you.
+Stem Innovation Nepal`;
+
+  const whatsappUrl = `https://wa.me/${ADMIN_WHATSAPP_NUMBER}?text=${encodeURIComponent(
+    message
+  )}`;
+
+  window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+};
 
   /* ---------- Loading ---------- */
   if (loading) {
@@ -204,11 +251,12 @@ export default function LabDetailsPage() {
 
               {/* Add to Cart - later */}
               <button
-                type="button"
-                className="mt-6 w-full rounded-full bg-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal focus:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
-              >
-                Add to Cart
-              </button>
+  type="button"
+  onClick={handleAddToCart}
+  className="mt-6 w-full rounded-full bg-orange px-6 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-teal focus:outline-none focus-visible:ring-2 focus-visible:ring-blue focus-visible:ring-offset-2"
+>
+  Add to Cart
+</button>
             </div>
           </div>
         </div>
