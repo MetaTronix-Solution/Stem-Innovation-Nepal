@@ -104,7 +104,7 @@ export default function Footer() {
                 href="mailto:info@steminnovationnepal.com"
                 className="transition hover:text-orange"
               >
-                info@steminnovationnepal.com
+                siddharthayadav98@gmail.com
               </a>
             </div>
 
@@ -118,7 +118,7 @@ export default function Footer() {
                 href="tel:+9779800000000"
                 className="transition hover:text-orange"
               >
-                +977 9800000000
+                +977 9812020752
               </a>
             </div>
           </div>
